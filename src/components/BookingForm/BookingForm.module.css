@@ -1,0 +1,52 @@
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+
+.titleForm {
+  margin-bottom: 8px;
+}
+
+.txtForm {
+  color: var(--font-second);
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 14px 20px;
+  height: 48px;
+  border-radius: var(--radius);
+  background: var(--inputs);
+  color: var(--font-second);
+}
+
+.area {
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 14px 20px;
+  height: 88px;
+  border-radius: var(--radius);
+  background: var(--inputs);
+  color: var(--font-second);
+}
+
+.error {
+  padding-left: 20px;
+  height: 16px;
+  color: red;
+  font-size: var(--fs-second);
+}
+
+.btnSend {
+  margin: 8px auto 0;
+}

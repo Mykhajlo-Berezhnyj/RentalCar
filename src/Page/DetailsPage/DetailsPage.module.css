@@ -1,0 +1,46 @@
+.sectionCard {
+  padding: 84px 0 104px;
+  text-align: left;
+}
+
+.wrapper {
+  display: flex;
+  gap: 72px;
+}
+
+.wrapLeft {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+  gap: 40px;
+}
+
+.form {
+  width: 640px;
+  height: 488px;
+  gap: 24px;
+  border-radius: 10px;
+  border-width: 1px;
+  padding: 32px;
+}
+
+.wrapRight {
+  width: 488px;
+  padding-top: 20px;
+}
+
+.sectionBase {
+  margin-bottom: 68px;
+}
+
+.sectionParametrs {
+  display: flex;
+  flex-direction: column;
+  gap: 110px;
+}
+
+.conditionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

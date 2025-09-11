@@ -1,0 +1,46 @@
+.baseInfo {
+  display: flex;
+  text-wrap: nowrap;
+  gap: 16px;
+  align-items: baseline;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.carId {
+  color: var(--font-second);
+  cursor: pointer;
+}
+
+.geo {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.location {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.price {
+  color: var(--button);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h2);
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.description {
+  text-align: left;
+  font-weight: var(--fw-medium);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}

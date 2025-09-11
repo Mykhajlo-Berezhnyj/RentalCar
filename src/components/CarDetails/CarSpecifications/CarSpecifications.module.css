@@ -1,0 +1,17 @@
+.CarSpecifications {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.specList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}

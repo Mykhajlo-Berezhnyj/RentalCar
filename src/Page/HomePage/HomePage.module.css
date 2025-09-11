@@ -1,0 +1,21 @@
+.heroSection {
+  width: 1440px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 436px;
+  padding-left: 328px;
+  padding-right: 329px;
+  background: #00000033;
+  background-image: url("../../img/HeroImage.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url("../../img/HeroImage@2.webp");
+  }
+}
+
+

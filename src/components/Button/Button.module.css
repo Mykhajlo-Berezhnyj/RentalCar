@@ -1,0 +1,45 @@
+.btn {
+  width: 156px;
+  height: 44px;
+  border-radius: var(--radius);
+  font-size: 1em;
+  font-weight: var(--fw-semibold);
+  padding: 12px 51px;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.btnWhite {
+  border: 1px solid var(--button);
+  transition: border-color 0.25s ease-in-out;   
+  padding: 12px 38px;
+
+  &:hover {
+    border-color: var(--button-hover);
+  }
+}
+
+.btnFill {
+  background-color: var(--button);
+  color: var(--background);
+  border: none;
+
+  &:hover {
+    background-color: var(--button-hover);
+  }
+}
+
+.btnFillLarge {
+  border: none;
+  width: 276px;
+  height: 44px;
+  padding: 12px 99px;
+  background-color: var(--button);
+  color: var(--background);
+
+  &:hover {
+    background-color: var(--button-hover);
+  }
+}

@@ -1,0 +1,10 @@
+.header {
+  padding: 24px 0;
+  height: 68px;
+  background-color: var(--header-color);
+}
+
+.appBar {
+  display: flex;
+  justify-content: space-between;
+}

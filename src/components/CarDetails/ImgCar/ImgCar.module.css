@@ -1,0 +1,24 @@
+.tumb {
+  position: relative;
+  width: 100%;
+  height: 512px;
+  border-radius: 18.74px;
+  overflow: hidden;
+}
+
+.imgCar {
+  width: 100%;
+  height: 100%;
+}
+
+.btnFavorite {
+  position: absolute;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  top: 16px;
+  right: 16px;
+}

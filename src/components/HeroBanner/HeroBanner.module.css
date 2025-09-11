@@ -1,0 +1,16 @@
+.heroBanner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 783px;
+    height: 204px;
+}
+
+.heroTxt {
+    font-size: var(--fs-h2);
+    line-height: var(--fs-h2);
+    color: var(--background);
+    padding-top: 16px;
+    padding-bottom: 40px;
+}
