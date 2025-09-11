@@ -12,34 +12,43 @@ const handleRejected = (state, action) => {
 };
 
 const handleFulfilled = (state, action) => {
-  const payloadData = action.payload.data;
+  const payloadData = action.payload;
   const { cars: carsArray, totalCars, page, totalPages } = payloadData;
   state.items =
-    state.pagination.page === 1 ? carsArray : [...state.items, ...carsArray];
+    Number(state.pagination.page) === 1
+      ? carsArray
+      : [...state.items, ...carsArray];
+  console.log(
+    "🚀 ~ handleFulfilled ~ state.pagination.page:",
+    state.pagination.page
+  );
+  console.log("🚀 ~ handleFulfilled ~ state.items:", state.items);
   state.pagination = {
     totalCars,
-    page,
-    totalPages,
+    page: Number(page),
+    totalPages: Number(totalPages),
   };
   state.isLoading = false;
   state.error = null;
 };
 
+const initialState = {
+  items: [],
+  favorites: [],
+  current: null,
+  pagination: {
+    totalCars: null,
+    page: 1,
+    limit: 12,
+    totalPages: 1,
+  },
+  isLoading: false,
+  error: null,
+};
+
 const slice = createSlice({
   name: "cars",
-  initialState: {
-    items: [],
-    favorites: [],
-    current: null,
-    pagination: {
-      totalCars: null,
-      page: 1,
-      limit: 12,
-      totalPages: 1,
-    },
-    isLoading: false,
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
     resetCarsState: (state) => {
       state.items = [];
@@ -57,7 +66,7 @@ const slice = createSlice({
       state.pagination.limit = action.payload;
     },
     nextPage(state) {
-      state.pagination.page += 1;
+      state.pagination.page = Number(state.pagination.page) + 1;
     },
     setFavorites(state, action) {
       const cardId = action.payload;

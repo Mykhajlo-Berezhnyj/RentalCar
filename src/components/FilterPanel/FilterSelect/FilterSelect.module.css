@@ -4,10 +4,20 @@
   gap: 8px;
   text-align: left;
   height: 68px;
-  font-weight: var(--fw-regular);
 }
 
 .select {
   width: 100%;
-  background: var(--inputs);
+  height: 44px;
+  padding: 12px 16px;
+  background-color: var(--inputs);
+  border-radius: var(--radius);
+  outline: none;
+  border: none;
+}
+
+.label {
+  font-size: var(--fs-second);
+  font-weight: var(--fw-regular);
+  color: var(--font-second);
 }
