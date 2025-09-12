@@ -1,3 +1,50 @@
+.filterPanel {
+  display: flex;
+  gap: 16px;
+}
+
 .brand {
-    width: 204px;
+  width: 204px;
+}
+
+.price {
+  width: 196px;
+}
+
+.mileage {
+  width: 320px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputBlock {
+  display: flex;
+  height: 44px;
+  border-radius: var(--radius);
+  background-color: var(--inputs);
+}
+
+.inputWrapper {
+  display: flex;
+  height: 44px;
+  width: 160px;
+  padding-block: 12px;
+  padding-left: 24px;
+  align-items: baseline;
+}
+
+.inputWrapper:first-child {
+  border-right: 1px solid var(--border-inputs);
+}
+
+.btnSearch {
+  align-self: end;
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
 }

@@ -3,7 +3,7 @@ import { Button } from "../Button/Button";
 import Icon from "../Icon/Icon";
 import { selectFavorites } from "../../redux/cars/selectors";
 import css from "./FavoriteButton.module.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { setFavorites } from "../../redux/cars/slice";
 
 export default function FavoriteButton({ car, className }) {
@@ -12,15 +12,15 @@ export default function FavoriteButton({ car, className }) {
   const isFavorite = favorites.includes(car.id);
   const handleFavorite = () => {
     dispatch(setFavorites(car.id));
-    toast.success(
-      isFavorite ? "Removed from favorites" : "Added to favorites"
-    );
+    toast.success(isFavorite ? "Removed from favorites" : "Added to favorites");
   };
 
   return (
     <Button className={className} onClick={handleFavorite}>
-      <Icon iconName={isFavorite ? "heart-active" : "heart"} className={isFavorite ? css.active : css.inactive} />
-      <ToastContainer position="top-center" autoClose={1500} />
+      <Icon
+        iconName={isFavorite ? "heart-active" : "heart"}
+        className={isFavorite ? css.active : css.inactive}
+      />
     </Button>
   );
 }

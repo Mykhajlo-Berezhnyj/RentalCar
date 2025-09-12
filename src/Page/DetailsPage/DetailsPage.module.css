@@ -44,3 +44,9 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.noResult {
+  color: red;
+  font-size: var(--fs-h3);
+  margin-top: 20px;
+}

@@ -1,0 +1,9 @@
+.reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(199, 15, 15);
+  font-weight: var(--fw-semibold);
+  transition: opacity 0.3s ease;
+}
+

@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { fetchCars } from "../../redux/cars/operation";
 import FilterPanel from "../../components/FilterPanel/FilterPanel";
 import { selectFilters } from "../../redux/filters/selectors";
+import css from "./CatalogPage.module.css";
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
@@ -36,14 +37,16 @@ export default function CatalogPage() {
   };
 
   return (
-    <Container>
-      <FilterPanel />
-      <CardList />
-      {cars.length > 0 && page < totalPages && (
-        <Button size="btnWhite" onClick={handleClick} disabled={isLoading}>
-          {isLoading ? "Loading..." : "Load more"}
-        </Button>
-      )}
-    </Container>
+    <div className={css.sectionCatalog}>
+      <Container className={css.catalog}>
+        <FilterPanel />
+        <CardList />
+        {cars.length > 0 && page < totalPages && (
+          <Button size="btnWhite" onClick={handleClick} disabled={isLoading}>
+            {isLoading ? "Loading..." : "Load more"}
+          </Button>
+        )}
+      </Container>
+    </div>
   );
 }

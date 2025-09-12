@@ -3,35 +3,79 @@ import FilterSelect from "./FilterSelect/FilterSelect";
 import { selectBrands } from "../../redux/brands/selectors";
 import { selectFilters } from "../../redux/filters/selectors";
 import css from "./FilterPanel.module.css";
-import { setBrand, setPrice } from "../../redux/filters/slice";
+import {
+  setBrand,
+  setMaxMileage,
+  setMinMileage,
+  setPrice,
+} from "../../redux/filters/slice";
+import { Button } from "../Button/Button";
+import FilterInput from "./FilterInput/FilterInput";
+import { fetchCars } from "../../redux/cars/operation";
+import { resetCarsState } from "../../redux/cars/slice";
+import ClearFiltersButton from "./ClearFiltersButton/ClearFiltersButton";
 
 export default function FilterPanel() {
   const dispatch = useDispatch();
   const brands = useSelector(selectBrands);
-  const prices = Array.from({length: 10}, (_, i) =>(i+1)*10);
+  const prices = Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
+  const filters = useSelector(selectFilters);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(resetCarsState());
+    dispatch(fetchCars({ page: 1, filters }));
+  };
 
   return (
-    <div>
+    <form className={css.filterPanel} onSubmit={handleSubmit}>
       <FilterSelect
         label="Car brand"
         name="brand"
         disabledValue="Choose a brand"
         array={brands}
         className={css.brand}
-        onChange={(selectedOption) => {
-          dispatch(setBrand(selectedOption.value));
+        value={filters.brand}
+        onChange={(value) => {
+          dispatch(setBrand(value));
         }}
       />
       <FilterSelect
-      label="Price/ 1 hour"
-      name="price"
-      disabledValue="Choose a price"
-      array={prices}
-      className={css.price}
-      onChange={(selectedOption) => {
-        dispatch(setPrice(selectedOption.value));
-      }}
-        />
-    </div>
+        label="Price/ 1 hour"
+        name="price"
+        disabledValue="Choose a price"
+        array={prices}
+        value={filters.price}
+        className={css.price}
+        onChange={(value) => {
+          dispatch(setPrice(value));
+        }}
+      />
+      <div className={css.mileage}>
+        <p class="txtSecond">Car mileage / km</p>
+        <div className={css.inputBlock}>
+          <FilterInput
+            name="minMileage"
+            label="From"
+            value={filters.minMileage}
+            onChange={(val) => dispatch(setMinMileage(val))}
+            className={css.inputWrapper}
+          />
+          <FilterInput
+            name="maxMileage"
+            label="To"
+            value={filters.maxMileage}
+            className={css.inputWrapper}
+            onChange={(val) => dispatch(setMaxMileage(val))}
+          />
+        </div>
+      </div>
+      <div className={css.btnWrapper}>
+        <Button type="submit" size="btnFill" className={css.btnSearch}>
+          Search
+        </Button>
+        <ClearFiltersButton />
+      </div>
+    </form>
   );
 }

@@ -66,6 +66,7 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  outline: none;
 }
 
 h1 {
@@ -87,6 +88,12 @@ h3 {
   line-height: var(--lh-h3);
 }
 
+.txtSecond {
+  color: var(--font-second);
+  font-size: var(--fs-second);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-second);
+}
 .button {
   width: 156px;
   height: 44px;

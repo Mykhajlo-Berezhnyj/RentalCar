@@ -39,7 +39,7 @@ export default function DetailsPage() {
   } else if (!car) {
     return <p>Loading</p>;
   } else if (error) {
-    return <p>{error}</p>;
+    return <p className={css.noResult} >{error}</p>;
   }
 
   return (

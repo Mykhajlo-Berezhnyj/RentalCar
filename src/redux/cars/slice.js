@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchCarById, fetchCars } from "./operation";
 
 const handlePending = (state) => {
@@ -18,11 +18,6 @@ const handleFulfilled = (state, action) => {
     Number(state.pagination.page) === 1
       ? carsArray
       : [...state.items, ...carsArray];
-  console.log(
-    "🚀 ~ handleFulfilled ~ state.pagination.page:",
-    state.pagination.page
-  );
-  console.log("🚀 ~ handleFulfilled ~ state.items:", state.items);
   state.pagination = {
     totalCars,
     page: Number(page),

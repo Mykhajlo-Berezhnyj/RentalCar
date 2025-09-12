@@ -16,8 +16,3 @@
   border: none;
 }
 
-.label {
-  font-size: var(--fs-second);
-  font-weight: var(--fw-regular);
-  color: var(--font-second);
-}

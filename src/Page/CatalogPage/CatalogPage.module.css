@@ -1,0 +1,10 @@
+.sectionCatalog {
+  padding: 84px 0 124px;
+}
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
