@@ -3,7 +3,7 @@ import { Button } from "../Button/Button";
 import css from "./CarCard.module.css";
 import { useNavigate } from "react-router-dom";
 import { normalizeCarData } from "../db/normalizeCarData";
-import FavoriteButton from "../../FavoriteButton/FavoriteButton";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 export default function CarCard({ car, index }) {
   const navigate = useNavigate();

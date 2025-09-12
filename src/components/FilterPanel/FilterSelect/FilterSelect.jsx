@@ -29,6 +29,15 @@ export default function FilterSelect({
         onChange={onChange}
         classNamePrefix="custom-select"
         styles={customSelectStyles}
+        formatOptionLabel={(option, { context }) => {
+          if (context === "menu") {
+            return option.value;
+          }
+          if (name === "price") {
+            return `To $${option.value}`;
+          }
+          return option.value;
+        }}
       />
     </div>
   );

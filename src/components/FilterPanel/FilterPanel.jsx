@@ -3,22 +3,35 @@ import FilterSelect from "./FilterSelect/FilterSelect";
 import { selectBrands } from "../../redux/brands/selectors";
 import { selectFilters } from "../../redux/filters/selectors";
 import css from "./FilterPanel.module.css";
-import { setBrand } from "../../redux/filters/slice";
+import { setBrand, setPrice } from "../../redux/filters/slice";
 
 export default function FilterPanel() {
-  const brands = useSelector(selectBrands);
   const dispatch = useDispatch();
+  const brands = useSelector(selectBrands);
+  const prices = Array.from({length: 10}, (_, i) =>(i+1)*10);
 
   return (
-    <FilterSelect
-      label="Car brand"
-      name="brand"
-      disabledValue="Choose a brand"
-      array={brands}
-      className={css.brand}
+    <div>
+      <FilterSelect
+        label="Car brand"
+        name="brand"
+        disabledValue="Choose a brand"
+        array={brands}
+        className={css.brand}
+        onChange={(selectedOption) => {
+          dispatch(setBrand(selectedOption.value));
+        }}
+      />
+      <FilterSelect
+      label="Price/ 1 hour"
+      name="price"
+      disabledValue="Choose a price"
+      array={prices}
+      className={css.price}
       onChange={(selectedOption) => {
-        dispatch(setBrand(selectedOption.value));
+        dispatch(setPrice(selectedOption.value));
       }}
-    />
+        />
+    </div>
   );
 }
