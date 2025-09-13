@@ -38,12 +38,13 @@ const orderSlice = createSlice({
       .addCase(fetchAddOrders.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = state.items.push(action.payload);
+        console.log("payload.data", action.payload.data);
+        state.items.push(action.payload.data);
       })
       .addCase(fetchAddOrders.rejected, handleRejected);
   },
 });
 
-export const clearOrders =orderSlice.actions;
+export const {clearOrders} =orderSlice.actions;
 
 export default orderSlice.reducer;

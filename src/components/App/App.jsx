@@ -10,6 +10,7 @@ import { fetchBrands } from "../../redux/brands/operations.js";
 import { ToastContainer } from "react-toastify";
 import NotFoundPage from "../../Page/NotFoundPage/NotFoundPage.jsx";
 import Loader from "../Loader/Loader.jsx";
+import OrdersPage from "../../Page/OrdersPage/OrdersPage.jsx";
 
 const HomePage = lazy(() => import("../../Page/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../../Page/CatalogPage/CatalogPage"));
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:id" element={<DetailsPage />} />
+            <Route path="/orders" element={<OrdersPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

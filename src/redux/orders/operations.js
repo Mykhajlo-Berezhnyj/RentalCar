@@ -13,6 +13,7 @@ export const fetchAddOrders = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await apiOrders.post("/orders", payload);
+      console.log("🚀 ~ fetchAddOrders ~ response.data:", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
