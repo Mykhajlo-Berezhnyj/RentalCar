@@ -10,3 +10,7 @@ export const selectError = (state) => state.cars.error;
 export const selectPagination = (state) => state.cars.pagination;
 
 export const selectCarCurrent = (state) => state.cars.current;
+
+export const selectCarsStatus = (state) => state.cars.status;
+
+export const selectHasFilters= (state) => state.cars.hasFilters;

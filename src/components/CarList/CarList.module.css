@@ -6,3 +6,9 @@
   row-gap: 48px;
   column-gap: 32px;
 }
+
+.noCars {
+  color: red;
+  margin-top: 20px;
+  font-size: var(--fs-h3);
+}

@@ -16,6 +16,7 @@ import SectionConditions from "../../components/CarDetails/SectionConditions/Sec
 import CarSpecifications from "../../components/CarDetails/CarSpecifications/CarSpecifications";
 import CarAccessories from "../../components/CarDetails/CarAccessories/CarAccessories";
 import ImgCar from "../../components/CarDetails/ImgCar/ImgCar";
+import Loader from "../../components/Loader/Loader";
 
 export default function DetailsPage() {
   const isLoading = useSelector(selectisLoading);
@@ -35,11 +36,11 @@ export default function DetailsPage() {
   }, [dispatch, id]);
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <Loader className={css.loader} />;
   } else if (!car) {
-    return <p>Loading</p>;
+    return <Loader className={css.loader}/>;
   } else if (error) {
-    return <p className={css.noResult} >{error}</p>;
+    return <p className={css.noResult}>{error}</p>;
   }
 
   return (

@@ -50,3 +50,7 @@
   font-size: var(--fs-h3);
   margin-top: 20px;
 }
+
+.loader {
+  margin-top: 288px;
+}

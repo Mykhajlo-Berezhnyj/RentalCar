@@ -13,20 +13,22 @@ export default function FilterSelect({
   className,
   onChange,
 }) {
-  const [selected, setSelected] = useState(null);
+  // const [selected, setSelected] = useState(null);
   const options = array.map((item) => ({
     value: item,
     label: item,
   }));
 
-  useEffect(() => {
-    const matchedOption = options.find((opt) => opt.value === value);
-    setSelected(matchedOption || null);
-  }, [value, options]);
+  const selectedOption = options.find((opt) => opt.value === value) || null;
+
+  // useEffect(() => {
+  //   const matchedOption = options.find((opt) => opt.value === value);
+  //   setSelected(matchedOption || null);
+  // }, [value, options]);
 
   return (
     <div className={clsx(css.selectFilter, className)}>
-      <label htmlFor={name} class="txtSecond">
+      <label htmlFor={name} className="txtSecond">
         {label}
       </label>
       <Select
@@ -34,9 +36,8 @@ export default function FilterSelect({
         name={name}
         options={options}
         placeholder={disabledValue}
-        value={selected}
+        value={selectedOption}
         onChange={(option) => {
-          setSelected(option);
           onChange(option.value);
         }}
         classNamePrefix="custom-select"

@@ -11,31 +11,34 @@ export default function FilterInput({
   const [val, setVal] = useState(
     typeof value === "string" || typeof value === "number"
       ? value.toString()
-      : null
+      : ""
   );
 
   useEffect(() => {
-    setVal(value !== null && value !== undefined ? value.toString() : "");
+    if (value !== null && value !== undefined) {
+      setVal(Number(value).toLocaleString("en-US"));
+    } else {
+      setVal("");
+    }
   }, [value]);
 
-  const handeChange = (e) => {
-    const input = e.target.value.replace(/,/g, "");
+  const handleChange = (e) => {
+    const input = e.target.value;
+    // .replace(/,/g, "");
     if (/^\d*$/.test(input)) {
       setVal(input);
-      //   onChange(Number(input));
     }
   };
 
   const handleBlur = () => {
-    const num = val ? Number(val) : null;
-    console.log("🚀 ~ handleBlur ~ num:", num);
-    const formatted = val ? Number(val).toLocaleString("en-US") : null;
+    const num = val ? Number(val.replace(/,/g, "")) : null;
+    const formatted = num ? Number(num).toLocaleString("en-US") : null;
     setVal(formatted);
     onChange(num);
   };
 
   const handleFocus = () => {
-    setVal(value.toString());
+    setVal(value ? value.toString() : "");
   };
 
   return (
@@ -49,7 +52,7 @@ export default function FilterInput({
         aria-label={`Mileage ${label}`}
         title={`Input mileage ${label}, example: 2500`}
         className={css.input}
-        onChange={handeChange}
+        onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
       />

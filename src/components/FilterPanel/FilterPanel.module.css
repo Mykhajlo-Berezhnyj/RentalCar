@@ -43,8 +43,18 @@
   align-self: end;
 }
 
+.btnSearch:disabled {
+  background-color: grey;
+}
+
 .btnWrapper {
   display: flex;
   align-items: flex-end;
   gap: 10px;
+}
+
+.error {
+  color: red;
+  font-size: var(--fs-second);
+  text-align: center;
 }

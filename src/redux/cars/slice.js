@@ -3,11 +3,13 @@ import { fetchCarById, fetchCars } from "./operation";
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.status = "loading";
   state.error = null;
 };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
+  state.status = "failed";
   state.error = action.payload || action.error.message;
 };
 
@@ -24,6 +26,7 @@ const handleFulfilled = (state, action) => {
     totalPages: Number(totalPages),
   };
   state.isLoading = false;
+  state.status = "succeeded";
   state.error = null;
 };
 
@@ -31,12 +34,14 @@ const initialState = {
   items: [],
   favorites: [],
   current: null,
+  hasFilters: false,
   pagination: {
     totalCars: null,
     page: 1,
     limit: 12,
     totalPages: 1,
   },
+  status: "idle",
   isLoading: false,
   error: null,
 };
@@ -47,6 +52,7 @@ const slice = createSlice({
   reducers: {
     resetCarsState: (state) => {
       state.items = [];
+      state.status = "idle";
       state.pagination = {
         totalCars: 0,
         page: 1,
@@ -72,6 +78,9 @@ const slice = createSlice({
         state.favorites.push(cardId);
       }
     },
+    setHasFilters(state, action) {
+      state.hasFilters = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,7 +97,13 @@ const slice = createSlice({
   },
 });
 
-export const { setPage, setLimit, nextPage, resetCarsState, setFavorites } =
-  slice.actions;
+export const {
+  setPage,
+  setLimit,
+  nextPage,
+  resetCarsState,
+  setFavorites,
+  setHasFilters,
+} = slice.actions;
 
 export default slice.reducer;

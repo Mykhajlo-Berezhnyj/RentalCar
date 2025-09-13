@@ -12,17 +12,34 @@ import {
 import { Button } from "../Button/Button";
 import FilterInput from "./FilterInput/FilterInput";
 import { fetchCars } from "../../redux/cars/operation";
-import { resetCarsState } from "../../redux/cars/slice";
+import { resetCarsState, setHasFilters } from "../../redux/cars/slice";
 import ClearFiltersButton from "./ClearFiltersButton/ClearFiltersButton";
+import { useEffect, useState } from "react";
 
 export default function FilterPanel() {
   const dispatch = useDispatch();
   const brands = useSelector(selectBrands);
   const prices = Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
   const filters = useSelector(selectFilters);
+  const [error, setError] = useState(null);
+
+  const min = filters.minMileage ?? null;
+  const max = filters.maxMileage ?? Infinity;
+
+  const isValid = !min || !max || Number(max) >= Number(min);
+
+  useEffect(() => {
+    if (!isValid) {
+      setError("Max mileage must be greater than or equal to Min mileage");
+    } else {
+      setError(null);
+    }
+  }, [isValid]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(setHasFilters(true));
+    console.log("Dispatch setHasFilters");
     dispatch(resetCarsState());
     dispatch(fetchCars({ page: 1, filters }));
   };
@@ -52,7 +69,7 @@ export default function FilterPanel() {
         }}
       />
       <div className={css.mileage}>
-        <p class="txtSecond">Car mileage / km</p>
+        <p className="txtSecond">Car mileage / km</p>
         <div className={css.inputBlock}>
           <FilterInput
             name="minMileage"
@@ -69,9 +86,15 @@ export default function FilterPanel() {
             onChange={(val) => dispatch(setMaxMileage(val))}
           />
         </div>
+        {error ? <p className={css.error}>{error}</p> : null}
       </div>
       <div className={css.btnWrapper}>
-        <Button type="submit" size="btnFill" className={css.btnSearch}>
+        <Button
+          type="submit"
+          size="btnFill"
+          className={css.btnSearch}
+          disabled={!isValid}
+        >
           Search
         </Button>
         <ClearFiltersButton />

@@ -5,6 +5,12 @@
   width: 100%;
 }
 
+.pageContent {
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +45,8 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.fallbackLoader {
+  margin-top: 288px;
 }

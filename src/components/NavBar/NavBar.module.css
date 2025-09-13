@@ -8,3 +8,25 @@
 .active {
   color: var(--button);
 }
+
+.link {
+  position: relative;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--button-hover);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in;
+}
+
+.link:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
