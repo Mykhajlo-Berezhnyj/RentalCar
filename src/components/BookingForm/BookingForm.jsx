@@ -4,8 +4,17 @@ import DatePickerField from "./DatePickerField/DatePickerField";
 import css from "./BookingForm.module.css";
 import ErrorPlaceholder from "../../utils/ErrorPlaceholder/ErrorPlaceholder";
 import { Button } from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAddOrders } from "../../redux/orders/operations";
+import { toast } from "react-toastify";
+import { selectError, selectLoading } from "../../redux/orders/selectors";
+import Loader from "../Loader/Loader";
 
-export default function BookingForm() {
+export default function BookingForm({ carId }) {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+
   const initialValues = {
     name: "",
     email: "",
@@ -38,11 +47,21 @@ export default function BookingForm() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          const payload = { ...values, carId };
+          console.log("🚀 ~ BookingForm ~ payload:", payload)
+          dispatch(fetchAddOrders(payload))
+            .unwrap()
+            .then(() => {
+              toast.success("Order create successful");
+              resetForm();
+            })
+            .catch((error) => {
+              toast.error(`Error: ${error.message}`);
+            })
+            .finally(() => {
+              setSubmitting(false);
+            });
         }}
       >
         {({ isSubmitting }) => (
@@ -80,12 +99,18 @@ export default function BookingForm() {
               className={css.area}
             />
             <ErrorPlaceholder name="comment" />
-            <Button type="submit" disabled={isSubmitting} size="btnFill" className={css.btnSend}>
-              Send
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              size="btnFill"
+              className={css.btnSend}
+            >
+              {isLoading ? "Sending..." : "Send"}
             </Button>
           </Form>
         )}
       </Formik>
+      {isLoading && <Loader />}
     </div>
   );
 }

@@ -38,7 +38,7 @@ export default function DetailsPage() {
   if (isLoading) {
     return <Loader className={css.loader} />;
   } else if (!car) {
-    return <Loader className={css.loader}/>;
+    return <Loader className={css.loader} />;
   } else if (error) {
     return <p className={css.noResult}>{error}</p>;
   }
@@ -49,7 +49,7 @@ export default function DetailsPage() {
         <div className={css.wrapper}>
           <div className={css.wrapLeft}>
             <ImgCar car={car} />
-            <BookingForm className={css.form} />
+            <BookingForm carId={id} className={css.form} />
           </div>
           <div className={css.wrapRight}>
             <SectionBase car={car} className={css.sectionBase} />

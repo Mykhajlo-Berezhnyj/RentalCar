@@ -14,20 +14,32 @@ import storage from "redux-persist/lib/storage";
 import carsReducer from "./cars/slice";
 import filtersReducer from "./filters/slice";
 import brandsReducer from "./brands/slice";
+import ordersReducer from "./orders/slice";
 
-const persistConfig = {
+const carsPersistConfig = {
   key: "cars",
   storage,
   whitelist: ["favorites"],
 };
 
-const persistedCarsReducer = persistReducer(persistConfig, carsReducer);
+const ordersPersistConfig = {
+  key: "orders",
+  storage,
+  whitelist: ["items"],
+};
+
+const persistedCarsReducer = persistReducer(carsPersistConfig, carsReducer);
+const persistedOrdersReducer = persistReducer(
+  ordersPersistConfig,
+  ordersReducer
+);
 
 export const store = configureStore({
   reducer: {
     filters: filtersReducer,
     cars: persistedCarsReducer,
     brands: brandsReducer,
+    orders: persistedOrdersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

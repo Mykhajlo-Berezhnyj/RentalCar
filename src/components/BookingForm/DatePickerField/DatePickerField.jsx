@@ -11,13 +11,12 @@ export default function DatePickerField({ ...props }) {
     <DatePicker
       {...field}
       {...props}
-      selected={
-        field.value
-          ? new Date(new Date(field.value).setHours(0, 0, 0, 0))
-          : null
-      }
-      onChange={(val) => setFieldValue(field.name, val)}
-      dateFormat="dd-MM-yyyy"
+      selected={field.value ? new Date(field.value) : null}
+      onChange={(val) => {
+        const isoDate = val ? val.toISOString() : null;
+        setFieldValue(field.name, isoDate);
+      }}
+      dateFormat="yyyy-MM-dd"
       placeholderText="Booking date"
     />
   );
