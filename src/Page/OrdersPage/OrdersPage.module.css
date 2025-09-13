@@ -1,0 +1,38 @@
+.sectionList {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.wrapList {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  text-align: center;
+}
+.orderList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.orderCard {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.orderDetails {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}

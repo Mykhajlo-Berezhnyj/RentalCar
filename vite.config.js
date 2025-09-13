@@ -9,4 +9,13 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://tasteorama-backend-dcjy.onrender.com",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import BookingForm from "../../components/BookingForm/BookingForm";
 import Container from "../../components/Container/Container";
 import css from "./DetailsPage.module.css";
@@ -17,23 +17,32 @@ import CarSpecifications from "../../components/CarDetails/CarSpecifications/Car
 import CarAccessories from "../../components/CarDetails/CarAccessories/CarAccessories";
 import ImgCar from "../../components/CarDetails/ImgCar/ImgCar";
 import Loader from "../../components/Loader/Loader";
+import OrderDetails from "../../components/OrderDetails/OrderDetails";
 
 export default function DetailsPage() {
   const isLoading = useSelector(selectisLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { carId, orderId } = useParams();
   const cars = useSelector(selectCars);
-  const carFromStore = cars.find((car) => car.id === id);
+  const carFromStore = cars.find((car) => car.id === carId);
   const carCurrent = useSelector(selectCarCurrent);
+  const location = useLocation();
+  const isDetaisPage = location.pathname.includes("/catalog");
+  const isOrdersPage = location.pathname.includes("/orders");
 
   const car = carFromStore || carCurrent;
 
+
+  useEffect(() => {
+    window.scrollTo({ top: 0});
+  }, []);
+
   useEffect(() => {
     if (!carFromStore) {
-      dispatch(fetchCarById(id));
+      dispatch(fetchCarById(carId));
     }
-  }, [dispatch, id]);
+  }, [dispatch, carId]);
 
   if (isLoading) {
     return <Loader className={css.loader} />;
@@ -49,7 +58,8 @@ export default function DetailsPage() {
         <div className={css.wrapper}>
           <div className={css.wrapLeft}>
             <ImgCar car={car} />
-            <BookingForm carId={id} className={css.form} />
+            {isDetaisPage && <BookingForm carId={carId} className={css.form} />}
+            {isOrdersPage && <OrderDetails carId={carId} orderId = {orderId} className={css.form} />}
           </div>
           <div className={css.wrapRight}>
             <SectionBase car={car} className={css.sectionBase} />

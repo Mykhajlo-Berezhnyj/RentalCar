@@ -17,30 +17,34 @@ export default function CarCard({ car, index }) {
         <img className={css.imgCar} src={car.img} alt={car.description} />
         <FavoriteButton className={css.btnFavorite} car={car} />
       </div>
-      <div className={clsx(css.txt, isP11 && css.txt11, isP12 && css.txt12)}>
-        <p>
-          {car.brand} <span className={css.modelCar}>{car.model}</span>,{" "}
-          {car.year}
-        </p>
-        <p>${car.rentalPrice}</p>
-      </div>
-      <div className={css.info}>
-        <div className={css.subTxt}>
-          <p>{city}</p>
-          <p>{country}</p>
-          <p>{car.rentalCompany}</p>
+      <div className={css.cardWrap} >
+        <div className={css.txdWrap} >
+          <div className={clsx(css.txt, isP11 && css.txt11, isP12 && css.txt12)}>
+            <p>
+              {car.brand} <span className={css.modelCar}>{car.model}</span>,{" "}
+              {car.year}
+            </p>
+            <p>${car.rentalPrice}</p>
+          </div>
+          <div className={css.info}>
+            <div className={css.subTxt}>
+              <p>{city}</p>
+              <p>{country}</p>
+              <p>{car.rentalCompany}</p>
+            </div>
+            <div className={css.subTxt}>
+              <p>{car.type}</p>
+              <p>{formattedKm} km</p>
+            </div>
+          </div>
         </div>
-        <div className={css.subTxt}>
-          <p>{car.type}</p>
-          <p>{formattedKm} km</p>
-        </div>
+        <Button
+          size="btnFillLarge"
+          onClick={() => navigate(`/catalog/${car.id}`)}
+        >
+          Read more
+        </Button>
       </div>
-      <Button
-        size="btnFillLarge"
-        onClick={() => navigate(`/catalog/${car.id}`)}
-      >
-        Read more
-      </Button>
     </div>
   );
 }

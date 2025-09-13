@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   width: 276px;
+  height: 424px;
 }
 
 .tumb {
@@ -11,7 +12,7 @@
   height: 268px;
   border-radius: var(--radius);
   overflow: hidden;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 tumb::after {
@@ -52,7 +53,7 @@ tumb::after {
 .info {
   display: flex;
   flex-direction: column;
-  padding-bottom: 28px;
+  /* padding-bottom: 28px; */
   color: var(--font-second);
   font-size: var(--fs-second);
   line-height: var(--lh-second);
@@ -82,4 +83,11 @@ tumb::after {
   border: none;
   padding: 0;
   background-color: transparent;
+}
+
+.cardWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
 }

@@ -1,0 +1,12 @@
+.wrapDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+}
+
+.listDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
