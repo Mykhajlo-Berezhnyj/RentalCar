@@ -10,3 +10,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.infoMessage {
+  margin-bottom: 20px;
+}

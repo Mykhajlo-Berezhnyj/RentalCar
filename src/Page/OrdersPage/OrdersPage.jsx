@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 export default function OrdersPage() {
   const navigate = useNavigate();
   const orders = useSelector(selectOrders);
-  console.log("🚀 ~ OrdersPage ~ orders:", orders);
 
   return (
     <div className={css.sectionList}>

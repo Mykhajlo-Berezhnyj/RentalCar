@@ -1,14 +1,21 @@
 import { useSelector } from "react-redux";
 import { selectOrders } from "../../redux/orders/selectors";
 import css from "./OrderDetails.module.css";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export default function OrderDetails({ orderId }) {
   const orders = useSelector(selectOrders);
+  //якщо зайшов по посиланню з іншого пристрою берем дані замовлення з url
+  const { orderId: urlOrderId, carId } = useParams();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  console.log("🚀 ~ OrderDetails ~ token:", token);
+  orderId = orderId || urlOrderId;
+  console.log("🚀 ~ OrderDetails ~ orderId:", orderId);
 
   const order = orders.find((order) => {
     return order._id === orderId;
   });
-  console.log("🚀 ~ OrderDetails ~ order:", order);
 
   const fields = [
     { label: "Number order", key: "_id" },
@@ -29,8 +36,17 @@ export default function OrderDetails({ orderId }) {
     { label: "Order updated", key: "updatedAt", format: true },
   ];
 
-  if (!order) {
+  if (!order && !token) {
     return <p>Order notFound</p>;
+  }
+  if (!order && orderId && token) {
+    return (
+      <p className={css.infoMessage}>
+        No information found for order <strong>{orderId}</strong>. You might be
+        accessing this link from a new device. To confirm your order, please
+        press the button below.
+      </p>
+    );
   }
 
   return (

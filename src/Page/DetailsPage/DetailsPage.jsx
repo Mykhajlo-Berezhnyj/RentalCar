@@ -68,8 +68,13 @@ export default function DetailsPage() {
   const handleConfirm = async () => {
     try {
       const response = await dispatch(fetchConfirmOrders(token)).unwrap();
-      toast.success(`Order ${response.order._id} confirmed`);
-      navigate(`/orders/${carId}/${orderId}`);
+      toast.success(
+        <div>
+          <p>Order {response._id} confirmed.</p>
+          <p>We will contact you.</p>
+        </div>
+      );
+      navigate(`/orders/${response.carId}/${response._id}`);
     } catch (error) {
       toast.error(
         `Failed to confirm order: ${error || "Server error or unknown issue"}`

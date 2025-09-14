@@ -9,7 +9,6 @@ export default function NavBar() {
     return clsx(css.link, isActive && css.active);
   };
   const orders = useSelector(selectOrders);
-  console.log("🚀 ~ NavBar ~ orders:", orders.length);
 
   return (
     <nav className={css.nav}>
