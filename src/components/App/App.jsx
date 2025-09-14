@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import NotFoundPage from "../../Page/NotFoundPage/NotFoundPage.jsx";
 import Loader from "../Loader/Loader.jsx";
 import OrdersPage from "../../Page/OrdersPage/OrdersPage.jsx";
+import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
 
 const HomePage = lazy(() => import("../../Page/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../../Page/CatalogPage/CatalogPage"));
@@ -38,6 +39,7 @@ function App() {
           </Routes>
         </Suspense>
       </div>
+      <ScrollToTop />
       <ToastContainer position="top-center" autoClose={1000} />
     </div>
   );
