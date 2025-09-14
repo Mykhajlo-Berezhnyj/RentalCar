@@ -8,7 +8,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     sourcemap: true,
+      outDir: "dist",
   },
+  base: "/",
   server: {
     proxy: {
       "/api": {

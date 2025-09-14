@@ -39,19 +39,24 @@ export const customSelectStyles = {
   option: (base, state) => ({
     ...base,
     backgroundColor: state.isSelected
-      ? "#007bff"
+      ? "#F7F7F7"
       : state.isFocused
       ? "#e6f0ff"
       : "#fff",
-    color: state.isSelected ? "#fff" : "#333",
+    color: state.isSelected ? "#101828" : "#8D929A",
     "&:active": {
-      backgroundColor: "#cce0ff",
+      color: "#101828",
+    },
+    "&:hover": {
+      color: "#101828",
+      backgroundColor: "#F7F7F7",
     },
   }),
   dropdownIndicator: (base) => ({
     ...base,
-    color: "#333",
+    color: "#101828",
     padding: 4,
+    size: 16,
   }),
   indicatorSeparator: (base) => ({
     display: "none",

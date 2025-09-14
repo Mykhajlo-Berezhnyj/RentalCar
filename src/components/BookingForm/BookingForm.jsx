@@ -52,14 +52,12 @@ export default function BookingForm({ carId }) {
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           const payload = { ...values, carId };
-          console.log("🚀 ~ BookingForm ~ payload:", payload);
           dispatch(fetchAddOrders(payload))
             .unwrap()
             .then((response) => {
               resetForm();
-              toast.success("Order create successful");
+              toast.success("Order create successful. Confirmed message to be send your email");
               const orderId = response.data._id;
-              console.log("🚀 ~ BookingForm ~ orderId:", orderId)
               navigate(`/orders/${carId}/${orderId}`);
             })
             .catch((error) => {

@@ -4,8 +4,8 @@ import axios from "axios";
 // axios.defaults.
 
 const apiOrders = axios.create({
-  baseURL: "http://localhost:3000",
-  // baseURL: "https://tasteorama-backend-dcjy.onrender.com/api",
+  // baseURL: "http://localhost:3000",
+  baseURL: "https://tasteorama-backend-dcjy.onrender.com",
 });
 
 export const fetchAddOrders = createAsyncThunk(

@@ -14,12 +14,19 @@ export default function CarCard({ car, index }) {
   return (
     <div className={css.card}>
       <div className={css.tumb}>
-        <img className={css.imgCar} src={car.img} alt={car.description} />
+        <img
+          className={css.imgCar}
+          src={car.img}
+          alt={car.description}
+          loading="lazy"
+        />
         <FavoriteButton className={css.btnFavorite} car={car} />
       </div>
-      <div className={css.cardWrap} >
-        <div className={css.txdWrap} >
-          <div className={clsx(css.txt, isP11 && css.txt11, isP12 && css.txt12)}>
+      <div className={css.cardWrap}>
+        <div className={css.txdWrap}>
+          <div
+            className={clsx(css.txt, isP11 && css.txt11, isP12 && css.txt12)}
+          >
             <p>
               {car.brand} <span className={css.modelCar}>{car.model}</span>,{" "}
               {car.year}

@@ -13,6 +13,7 @@ import { fetchCars } from "../../redux/cars/operation";
 import FilterPanel from "../../components/FilterPanel/FilterPanel";
 import { selectFilters } from "../../redux/filters/selectors";
 import css from "./CatalogPage.module.css";
+import { fetchBrands } from "../../redux/brands/operations";
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
@@ -20,6 +21,10 @@ export default function CatalogPage() {
   const cars = useSelector(selectCars);
   const isLoading = useSelector(selectisLoading);
   const filters = useSelector(selectFilters);
+
+  useEffect(() => {
+    dispatch(fetchBrands());
+  }, []);
 
   useEffect(() => {
     dispatch(resetCarsState());
