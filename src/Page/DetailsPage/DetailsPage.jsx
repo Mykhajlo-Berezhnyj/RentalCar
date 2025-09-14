@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import BookingForm from "../../components/BookingForm/BookingForm";
 import Container from "../../components/Container/Container";
 import css from "./DetailsPage.module.css";
@@ -10,7 +10,7 @@ import {
   selectisLoading,
 } from "../../redux/cars/selectors";
 import { fetchCarById } from "../../redux/cars/operation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SectionBase from "../../components/CarDetails/sectionBase/sectionBase";
 import SectionConditions from "../../components/CarDetails/SectionConditions/SectionConditions";
 import CarSpecifications from "../../components/CarDetails/CarSpecifications/CarSpecifications";
@@ -18,6 +18,10 @@ import CarAccessories from "../../components/CarDetails/CarAccessories/CarAccess
 import ImgCar from "../../components/CarDetails/ImgCar/ImgCar";
 import Loader from "../../components/Loader/Loader";
 import OrderDetails from "../../components/OrderDetails/OrderDetails";
+import { fetchConfirmOrders } from "../../redux/orders/operations";
+import { Button } from "../../components/Button/Button";
+import { toast } from "react-toastify";
+import { selectLoading } from "../../redux/orders/selectors";
 
 export default function DetailsPage() {
   const isLoading = useSelector(selectisLoading);
@@ -30,6 +34,10 @@ export default function DetailsPage() {
   const location = useLocation();
   const isDetaisPage = location.pathname.includes("/catalog");
   const isOrdersPage = location.pathname.includes("/orders");
+  const token = new URLSearchParams(location.search).get("token");
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const isloadConfirm = useSelector(selectLoading);
+  const navigate = useNavigate();
 
   const car = carFromStore || carCurrent;
 
@@ -53,6 +61,28 @@ export default function DetailsPage() {
     return <Loader className={css.loader} />;
   }
 
+  const handleConfirmClick = () => {
+    setShowConfirmDialog(true);
+  };
+
+  const handleConfirm = async () => {
+    try {
+      const response = await dispatch(fetchConfirmOrders(token)).unwrap();
+      toast.success(`Order ${response.order._id} confirmed`);
+      navigate(`/orders/${carId}/${orderId}`);
+    } catch (error) {
+      toast.error(
+        `Failed to confirm order: ${error || "Server error or unknown issue"}`
+      );
+    } finally {
+      setShowConfirmDialog(false);
+    }
+  };
+
+  const handleCancel = () => {
+    setShowConfirmDialog(false);
+  };
+
   return (
     <>
       <div className={css.sectionCard}>
@@ -64,16 +94,40 @@ export default function DetailsPage() {
                 <BookingForm carId={carId} className={css.form} />
               )}
               {isOrdersPage && (
-                <OrderDetails
-                  carId={carId}
-                  orderId={orderId}
-                  className={css.form}
-                />
+                <div>
+                  <OrderDetails
+                    carId={carId}
+                    orderId={orderId}
+                    className={css.form}
+                  />
+                  {token && (
+                    <Button
+                      size="btnFillLarge"
+                      className={css.btnConfirm}
+                      onClick={() => handleConfirmClick()}
+                    >
+                      Confirm order
+                    </Button>
+                  )}
+                  {showConfirmDialog && (
+                    <div className={css.confirmDialog}>
+                      <p>Are you sure you want to confirm this order?</p>
+                      {isloadConfirm ? (
+                        <Loader />
+                      ) : (
+                        <div className={css.dialogButtons}>
+                          <Button onClick={handleConfirm}>Yes</Button>
+                          <Button onClick={handleCancel}>No</Button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
             <div className={css.wrapRight}>
               <SectionBase car={car} className={css.sectionBase} />
-              <div className={css.sectionParametrs}>
+              <div className={css.sectionParams}>
                 <SectionConditions car={car} />
                 <CarSpecifications car={car} />
                 <CarAccessories car={car} />

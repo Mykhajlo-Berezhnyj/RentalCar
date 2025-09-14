@@ -23,6 +23,10 @@ export default function OrdersPage() {
               {order.carId}
               <strong>Booking date:</strong>
               {order.bookingDate}
+              <strong>Order confirmed:</strong>{" "}
+              <span style={{ color: order.isConfirmed ? "green" : "red" }}>
+                {order.isConfirmed ? "Yes" : "No"}
+              </span>
               <strong>Order created:</strong>
               {order.createdAt}
               <Button

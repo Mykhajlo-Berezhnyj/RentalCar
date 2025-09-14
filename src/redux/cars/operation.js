@@ -19,7 +19,9 @@ export const fetchCars = createAsyncThunk(
       const response = await axios.get("/cars", { params });
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(
+        error?.response?.data?.message || error.message
+      );
     }
   }
 );

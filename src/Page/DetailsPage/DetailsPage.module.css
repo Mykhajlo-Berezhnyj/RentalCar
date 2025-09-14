@@ -52,7 +52,7 @@
   margin-bottom: 68px;
 }
 
-.sectionParametrs {
+.sectionParams {
   display: flex;
   flex-direction: column;
   gap: 110px;
@@ -73,4 +73,30 @@
 
 .loader {
   margin-top: 288px;
+}
+
+.btnConfirm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  padding: 0;
+}
+
+.confirmDialog {
+  background: var(--inputs);
+  border: 1px solid grey;
+  padding: 20px;
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.dialogButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
