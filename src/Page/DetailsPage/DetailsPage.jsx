@@ -11,7 +11,7 @@ import {
 } from "../../redux/cars/selectors";
 import { fetchCarById } from "../../redux/cars/operation";
 import { useEffect, useState } from "react";
-import SectionBase from "../../components/CarDetails/sectionBase/sectionBase";
+import SectionBase from "../../components/CarDetails/SectionBase/SectionBase";
 import SectionConditions from "../../components/CarDetails/SectionConditions/SectionConditions";
 import CarSpecifications from "../../components/CarDetails/CarSpecifications/CarSpecifications";
 import CarAccessories from "../../components/CarDetails/CarAccessories/CarAccessories";
