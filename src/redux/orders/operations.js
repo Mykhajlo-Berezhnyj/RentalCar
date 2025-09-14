@@ -13,7 +13,6 @@ export const fetchAddOrders = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await apiOrders.post("/api/orders", payload);
-      console.log("🚀 ~ fetchAddOrders ~ response.data:", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -38,7 +37,6 @@ export const fetchConfirmOrders = createAsyncThunk(
   async (token, thunkAPI) => {
     try {
       const response = await apiOrders.patch("/api/orders", { token });
-      console.log("🚀 ~ response:", response.data.order);
       return response.data.order;
     } catch (error) {
       return thunkAPI.rejectWithValue(

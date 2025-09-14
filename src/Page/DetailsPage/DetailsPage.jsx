@@ -116,7 +116,7 @@ export default function DetailsPage() {
                   )}
                   {showConfirmDialog && (
                     <div className={css.confirmDialog}>
-                      <p>Are you sure you want to confirm this order?</p>
+                      <p className={css.confirmTxt}>Are you sure you want to confirm this order?</p>
                       {isloadConfirm ? (
                         <Loader />
                       ) : (

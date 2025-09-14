@@ -13,7 +13,6 @@ const filtersSlice = createSlice({
   reducers: {
     setBrand(state, action) {
       state.brand = action.payload;
-      console.log("🚀 ~ setBrand ~ state.brand:", state.brand)
     },
     setPrice(state, action) {
       state.price = action.payload;

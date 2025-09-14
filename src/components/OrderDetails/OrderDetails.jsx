@@ -9,9 +9,7 @@ export default function OrderDetails({ orderId }) {
   const { orderId: urlOrderId, carId } = useParams();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  console.log("🚀 ~ OrderDetails ~ token:", token);
   orderId = orderId || urlOrderId;
-  console.log("🚀 ~ OrderDetails ~ orderId:", orderId);
 
   const order = orders.find((order) => {
     return order._id === orderId;

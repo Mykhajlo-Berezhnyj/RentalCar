@@ -86,7 +86,8 @@
 .confirmDialog {
   background: var(--inputs);
   border: 1px solid grey;
-  padding: 20px;
+  border-radius: var(--radius);
+  padding: 50px;
   position: absolute;
   z-index: 100;
   top: 50%;
@@ -97,6 +98,11 @@
 
 .dialogButtons {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   margin-top: 10px;
+  border-radius: var(--radius);
+}
+
+.confirmTxt {
+  margin-bottom: 30px;
 }

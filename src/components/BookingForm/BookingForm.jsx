@@ -42,7 +42,6 @@ export default function BookingForm({ carId }) {
 
   return (
     <div className={css.formWrap}>
-      {isLoading && <Loader />}
       <h3 className={css.titleForm}>Book your car now</h3>
       <p className={css.txtForm}>
         Stay connected! We are always ready to help you.
@@ -56,7 +55,9 @@ export default function BookingForm({ carId }) {
             .unwrap()
             .then((response) => {
               resetForm();
-              toast.success("Order create successful. Confirmed message to be send your email");
+              toast.success(
+                "Order create successful. Confirmed message to be send your email"
+              );
               const orderId = response.data._id;
               navigate(`/orders/${carId}/${orderId}`);
             })
@@ -114,6 +115,7 @@ export default function BookingForm({ carId }) {
           </Form>
         )}
       </Formik>
+      {isLoading && <Loader />}
     </div>
   );
 }

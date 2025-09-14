@@ -39,7 +39,6 @@ export default function FilterPanel() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setHasFilters(true));
-    console.log("Dispatch setHasFilters");
     dispatch(resetCarsState());
     dispatch(fetchCars({ page: 1, filters }));
   };
