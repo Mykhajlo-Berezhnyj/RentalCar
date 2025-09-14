@@ -1,11 +1,15 @@
 import clsx from "clsx";
 import css from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectOrders } from "../../redux/orders/selectors";
 
 export default function NavBar() {
   const getActiveLinkClass = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
   };
+  const orders = useSelector(selectOrders);
+  console.log("🚀 ~ NavBar ~ orders:", orders.length);
 
   return (
     <nav className={css.nav}>
@@ -21,6 +25,11 @@ export default function NavBar() {
           </NavLink>
         </li>
       </ul>
+      {orders.length > 0 && (
+        <NavLink to="/orders" className={getActiveLinkClass}>
+          My orders
+        </NavLink>
+      )}
     </nav>
   );
 }

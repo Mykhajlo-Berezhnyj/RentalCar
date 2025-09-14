@@ -1,5 +1,9 @@
 .sectionCatalog {
-  padding: 84px 0 124px;
+  padding: 34px 0 44px;
+
+  @media (min-width: 768px) {
+    padding: 84px 0 124px;
+  }
 }
 
 .catalog {

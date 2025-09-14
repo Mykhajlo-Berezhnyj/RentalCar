@@ -33,9 +33,8 @@ export default function DetailsPage() {
 
   const car = carFromStore || carCurrent;
 
-
   useEffect(() => {
-    window.scrollTo({ top: 0});
+    window.scrollTo({ top: 0 });
   }, []);
 
   useEffect(() => {
@@ -46,31 +45,43 @@ export default function DetailsPage() {
 
   if (isLoading) {
     return <Loader className={css.loader} />;
-  } else if (!car) {
-    return <Loader className={css.loader} />;
-  } else if (error) {
+  }
+  if (error) {
     return <p className={css.noResult}>{error}</p>;
+  }
+  if (!car) {
+    return <Loader className={css.loader} />;
   }
 
   return (
-    <div className={css.sectionCard}>
-      <Container>
-        <div className={css.wrapper}>
-          <div className={css.wrapLeft}>
-            <ImgCar car={car} />
-            {isDetaisPage && <BookingForm carId={carId} className={css.form} />}
-            {isOrdersPage && <OrderDetails carId={carId} orderId = {orderId} className={css.form} />}
-          </div>
-          <div className={css.wrapRight}>
-            <SectionBase car={car} className={css.sectionBase} />
-            <div className={css.sectionParametrs}>
-              <SectionConditions car={car} />
-              <CarSpecifications car={car} />
-              <CarAccessories car={car} />
+    <>
+      <div className={css.sectionCard}>
+        <Container>
+          <div className={css.wrapper}>
+            <div className={css.wrapLeft}>
+              <ImgCar car={car} />
+              {isDetaisPage && (
+                <BookingForm carId={carId} className={css.form} />
+              )}
+              {isOrdersPage && (
+                <OrderDetails
+                  carId={carId}
+                  orderId={orderId}
+                  className={css.form}
+                />
+              )}
+            </div>
+            <div className={css.wrapRight}>
+              <SectionBase car={car} className={css.sectionBase} />
+              <div className={css.sectionParametrs}>
+                <SectionConditions car={car} />
+                <CarSpecifications car={car} />
+                <CarAccessories car={car} />
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 }

@@ -1,22 +1,41 @@
 .sectionCard {
-  padding: 84px 0 104px;
   text-align: left;
+  padding: 34px 0 54px;
+
+  @media (min-width: 768px) {
+    padding: 54px 0 84px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 84px 0 104px;
+  }
 }
 
 .wrapper {
   display: flex;
-  gap: 72px;
+  flex-direction: column;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 48px;
+  }
+
+  @media (min-width: 1440px) {
+    gap: 72px;
+  }
+
 }
 
 .wrapLeft {
   display: flex;
-  flex-direction: column;
-  width: 640px;
+  flex-wrap: wrap;
+  max-width: 640px;
   gap: 40px;
 }
 
 .form {
-  width: 640px;
+  max-width: 640px;
   height: 488px;
   gap: 24px;
   border-radius: 10px;
@@ -25,7 +44,7 @@
 }
 
 .wrapRight {
-  width: 488px;
+  max-width: 488px;
   padding-top: 20px;
 }
 
@@ -49,6 +68,7 @@
   color: red;
   font-size: var(--fs-h3);
   margin-top: 20px;
+  text-align: center;
 }
 
 .loader {

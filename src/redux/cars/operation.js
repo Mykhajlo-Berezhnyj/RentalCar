@@ -17,7 +17,6 @@ export const fetchCars = createAsyncThunk(
         maxMileage: maxMileage || undefined,
       };
       const response = await axios.get("/cars", { params });
-      console.log("🚀 ~ response.data:", response.data)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -32,7 +31,9 @@ export const fetchCarById = createAsyncThunk(
       const response = await axios.get(`/cars/${id}`);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        error?.response?.data?.message || error.message
+      );
     }
   }
 );

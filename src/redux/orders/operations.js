@@ -28,7 +28,7 @@ export const fetchOrders = createAsyncThunk(
       const response = await axios.get(`/api/orders?email=${email}`);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+      return thunkAPI.rejectWithValue(error.response?.error || error.message);
     }
   }
 );
