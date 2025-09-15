@@ -7,6 +7,7 @@ import NotFoundPage from "../../Page/NotFoundPage/NotFoundPage.jsx";
 import Loader from "../Loader/Loader.jsx";
 import OrdersPage from "../../Page/OrdersPage/OrdersPage.jsx";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
+import FavoritesPage from "../../Page/FavoritesPage/FavoritesPage.jsx";
 
 const HomePage = lazy(() => import("../../Page/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../../Page/CatalogPage/CatalogPage"));
@@ -24,12 +25,17 @@ function App() {
             <Route path="/catalog/:carId" element={<DetailsPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/orders/:carId/:orderId" element={<DetailsPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </div>
       <ScrollToTop />
-      <ToastContainer position="top-center" autoClose={2000} />
+      <ToastContainer
+        toastClassName="myToast"
+        position="top-center"
+        autoClose={3500}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 .nav {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   font-size: 14px;
 
   @media (min-width: 678px) {

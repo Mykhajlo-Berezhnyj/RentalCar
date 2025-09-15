@@ -69,14 +69,22 @@ const slice = createSlice({
     nextPage(state) {
       state.pagination.page = Number(state.pagination.page) + 1;
     },
+    // setFavorites(state, action) {
+    //   const cardId = action.payload;
+    //   const hasFavorite = state.favorites.includes(cardId);
+    //   if (hasFavorite) {
+    //     state.favorites = state.favorites.filter((id) => id !== cardId);
+    //   } else {
+    //     state.favorites.push(cardId);
+    //   }
+    // },
     setFavorites(state, action) {
-      const cardId = action.payload;
-      const hasFavorite = state.favorites.includes(cardId);
-      if (hasFavorite) {
-        state.favorites = state.favorites.filter((id) => id !== cardId);
-      } else {
-        state.favorites.push(cardId);
-      }
+      const car = action.payload;
+      const exist = state.favorites.some((fav) => fav.id === car.id);
+
+      state.favorites = exist
+        ? state.favorites.filter((fav) => fav.id !== car.id)
+        : [...state.favorites, car];
     },
     setHasFilters(state, action) {
       state.hasFilters = action.payload;

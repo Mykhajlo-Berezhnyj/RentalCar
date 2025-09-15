@@ -9,9 +9,10 @@ import { setFavorites } from "../../redux/cars/slice";
 export default function FavoriteButton({ car, className }) {
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-  const isFavorite = favorites.includes(car.id);
+  // const isFavorite = favorites.includes(car.id);
+  const isFavorite = favorites.some((fav) => fav.id === car.id);
   const handleFavorite = () => {
-    dispatch(setFavorites(car.id));
+    dispatch(setFavorites(car));
     toast.success(isFavorite ? "Removed from favorites" : "Added to favorites");
   };
 

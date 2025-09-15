@@ -56,7 +56,10 @@ export default function BookingForm({ carId }) {
             .then((response) => {
               resetForm();
               toast.success(
-                "Order create successful. Confirmed message to be send your email"
+                <div>
+                  <p>Order create successful!</p>
+                  <p>Confirmed message to be send your email</p>
+                </div>
               );
               const orderId = response.data._id;
               navigate(`/orders/${carId}/${orderId}`);

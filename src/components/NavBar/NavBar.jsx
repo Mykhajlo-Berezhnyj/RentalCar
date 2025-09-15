@@ -25,8 +25,8 @@ export default function NavBar() {
         </li>
       </ul>
       {orders.length > 0 && (
-        <NavLink to="/orders" className={getActiveLinkClass}>
-          My orders
+        <NavLink to="/favorites" className={getActiveLinkClass}>
+          My profile
         </NavLink>
       )}
     </nav>

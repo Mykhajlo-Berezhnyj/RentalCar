@@ -48,5 +48,11 @@
 }
 
 .fallbackLoader {
-  margin-top: 288px;
+  margin-top: 154px;
+}
+
+.myToast {
+  background-color: var(--inputs);
+  padding: 20px;
+  border-radius: var(--radius);
 }
