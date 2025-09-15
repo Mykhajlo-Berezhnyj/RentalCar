@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./FilterInput.module.css";
 
 export default function FilterInput({
@@ -14,19 +14,12 @@ export default function FilterInput({
       : ""
   );
 
-  useEffect(() => {
-    if (value !== null && value !== undefined) {
-      setVal(Number(value).toLocaleString("en-US"));
-    } else {
-      setVal("");
-    }
-  }, [value]);
-
   const handleChange = (e) => {
     const input = e.target.value;
     // .replace(/,/g, "");
     if (/^\d*$/.test(input)) {
       setVal(input);
+      onChange(input);
     }
   };
 
@@ -34,7 +27,7 @@ export default function FilterInput({
     const num = val ? Number(val.replace(/,/g, "")) : null;
     const formatted = num ? Number(num).toLocaleString("en-US") : null;
     setVal(formatted);
-    onChange(num);
+    // onChange(num);
   };
 
   const handleFocus = () => {
