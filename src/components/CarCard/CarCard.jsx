@@ -18,9 +18,8 @@ export default function CarCard({ car, index }) {
           className={css.imgCar}
           src={car.img}
           alt={car.description}
-          loading="lazy"
         />
-        <FavoriteButton className={css.btnFavorite} car={car} />
+        <FavoriteButton className={css.btnFavorite} aria-label="button add to favorite" title="add to favorite" car={car} />
       </div>
       <div className={css.cardWrap}>
         <div className={css.txdWrap}>
@@ -47,6 +46,7 @@ export default function CarCard({ car, index }) {
         </div>
         <Button
           size="btnFillLarge"
+          aria-label=" go to detail page"
           onClick={() => navigate(`/catalog/${car.id}`)}
         >
           Read more

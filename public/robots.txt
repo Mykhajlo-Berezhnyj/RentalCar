@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /favorites
+Disallow: /orders
+Sitemap: https://rental-car-yod9.vercel.app/sitemap.xml

@@ -109,6 +109,7 @@ export default function DetailsPage() {
                     <Button
                       size="btnFillLarge"
                       className={css.btnConfirm}
+                      aria-label="Confirm orders"
                       onClick={() => handleConfirmClick()}
                     >
                       Confirm order
@@ -121,8 +122,8 @@ export default function DetailsPage() {
                         <Loader />
                       ) : (
                         <div className={css.dialogButtons}>
-                          <Button onClick={handleConfirm}>Yes</Button>
-                          <Button onClick={handleCancel}>No</Button>
+                          <Button aria-label="Confirm orders" onClick={handleConfirm}>Yes</Button>
+                          <Button aria-label="Cancel Confirm" onClick={handleCancel}>No</Button>
                         </div>
                       )}
                     </div>

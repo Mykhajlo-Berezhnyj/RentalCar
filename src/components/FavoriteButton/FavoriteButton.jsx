@@ -17,7 +17,12 @@ export default function FavoriteButton({ car, className }) {
   };
 
   return (
-    <Button className={className} onClick={handleFavorite}>
+    <Button
+      className={className}
+      onClick={handleFavorite}
+      aaria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+      title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+    >
       <Icon
         iconName={isFavorite ? "heart-active" : "heart"}
         className={isFavorite ? css.active : css.inactive}

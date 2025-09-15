@@ -11,7 +11,7 @@ export default function HeroBanner() {
       <p className={css.heroTxt}>
         Reliable and budget-friendly rentals for any journey
       </p>
-      <Button size="btnFillLarge" className={css.btnCatalog} onClick={() => navigate("/catalog")}>
+      <Button size="btnFillLarge" aria-label="View Catalog" className={css.btnCatalog} onClick={() => navigate("/catalog")}>
         View Catalog
       </Button>
     </section>

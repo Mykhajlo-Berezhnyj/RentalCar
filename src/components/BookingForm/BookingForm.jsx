@@ -112,6 +112,7 @@ export default function BookingForm({ carId }) {
               disabled={isSubmitting}
               size="btnFill"
               className={css.btnSend}
+              aria-label="Send form"
             >
               {isLoading ? "Sending..." : "Send"}
             </Button>

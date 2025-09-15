@@ -92,6 +92,8 @@ export default function FilterPanel() {
           type="submit"
           size="btnFill"
           className={css.btnSearch}
+          aria-label="Search cars"
+          title="Search cars"
           disabled={!isValid}
         >
           Search

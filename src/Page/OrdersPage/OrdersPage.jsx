@@ -34,6 +34,7 @@ export default function OrdersPage() {
                 <Button
                   size="btnFillLarge"
                   className={css.orderDetails}
+                  aria-label="Go to detail order page"
                   onClick={() => {
                     navigate(`/orders/${order.carId}/${order._id}`);
                   }}
