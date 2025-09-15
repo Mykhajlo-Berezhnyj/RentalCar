@@ -2,11 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/Button/Button";
 import CardList from "../../components/CarList/CarList";
 import Container from "../../components/Container/Container";
-import {
-  nextPage,
-  setLimit,
-  setPage,
-} from "../../redux/cars/slice";
+import { nextPage, setLimit, setPage } from "../../redux/cars/slice";
 import {
   selectCars,
   selectCarsStatus,
@@ -46,7 +42,7 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const pageFromUrl = Number(searchParams.get("page")) || 1;
-    const limitFromUrl = Number(searchParams.get("limit"));
+    const limitFromUrl = Number(searchParams.get("limit")) || 12;
     const brandFromUrl = searchParams.get("brand") || "";
     const rentalPriceFromUrl = searchParams.get("rentalPrice") || "";
     const minMileageFromUrl = searchParams.get("minMileage") || "";
