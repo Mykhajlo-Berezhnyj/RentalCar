@@ -5,9 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import NotFoundPage from "../../Page/NotFoundPage/NotFoundPage.jsx";
 import Loader from "../Loader/Loader.jsx";
-import OrdersPage from "../../Page/OrdersPage/OrdersPage.jsx";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
-import FavoritesPage from "../../Page/FavoritesPage/FavoritesPage.jsx";
+import ProfilePage from "../../Page/ProfilePage/ProfilePage.jsx";
 
 const HomePage = lazy(() => import("../../Page/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../../Page/CatalogPage/CatalogPage"));
@@ -23,9 +22,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:carId" element={<DetailsPage />} />
-            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/orders" element={<ProfilePage />} />
             <Route path="/orders/:carId/:orderId" element={<DetailsPage />} />
-            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/favorites" element={<ProfilePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

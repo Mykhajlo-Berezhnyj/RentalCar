@@ -90,7 +90,7 @@ export default function BookingForm({ carId }) {
               aria-label="Email"
             />
             <ErrorPlaceholder name="email" />
-
+            {isLoading && <Loader />}
             <DatePickerField
               className={css.field}
               name="bookingDate"
@@ -119,7 +119,6 @@ export default function BookingForm({ carId }) {
           </Form>
         )}
       </Formik>
-      {isLoading && <Loader />}
     </div>
   );
 }
