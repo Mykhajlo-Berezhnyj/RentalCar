@@ -21,6 +21,7 @@ const handleFulfilled = (state, action) => {
       ? carsArray
       : [...state.items, ...carsArray];
   state.pagination = {
+    ...state.pagination,
     totalCars,
     page: Number(page),
     totalPages: Number(totalPages),
@@ -54,9 +55,9 @@ const slice = createSlice({
       state.items = [];
       state.status = "idle";
       state.pagination = {
+        ...state.pagination,
         totalCars: 0,
         page: 1,
-        limit: 12,
         totalPages: 0,
       };
     },
@@ -69,15 +70,6 @@ const slice = createSlice({
     nextPage(state) {
       state.pagination.page = Number(state.pagination.page) + 1;
     },
-    // setFavorites(state, action) {
-    //   const cardId = action.payload;
-    //   const hasFavorite = state.favorites.includes(cardId);
-    //   if (hasFavorite) {
-    //     state.favorites = state.favorites.filter((id) => id !== cardId);
-    //   } else {
-    //     state.favorites.push(cardId);
-    //   }
-    // },
     setFavorites(state, action) {
       const car = action.payload;
       const exist = state.favorites.some((fav) => fav.id === car.id);

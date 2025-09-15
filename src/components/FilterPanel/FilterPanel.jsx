@@ -7,7 +7,7 @@ import {
   setBrand,
   setMaxMileage,
   setMinMileage,
-  setPrice,
+  setRentalPrice,
 } from "../../redux/filters/slice";
 import { Button } from "../Button/Button";
 import FilterInput from "./FilterInput/FilterInput";
@@ -15,6 +15,7 @@ import { fetchCars } from "../../redux/cars/operation";
 import { resetCarsState, setHasFilters } from "../../redux/cars/slice";
 import ClearFiltersButton from "./ClearFiltersButton/ClearFiltersButton";
 import { useEffect, useState } from "react";
+import { selectPagination } from "../../redux/cars/selectors";
 
 export default function FilterPanel() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function FilterPanel() {
   const prices = Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
   const filters = useSelector(selectFilters);
   const [error, setError] = useState(null);
+  const {limit} = useSelector(selectPagination);
 
   const min = filters.minMileage ?? null;
   const max = filters.maxMileage ?? Infinity;
@@ -40,7 +42,7 @@ export default function FilterPanel() {
     e.preventDefault();
     dispatch(setHasFilters(true));
     dispatch(resetCarsState());
-    dispatch(fetchCars({ page: 1, filters }));
+    dispatch(fetchCars({ page: 1, limit, filters }));
   };
 
   return (
@@ -58,13 +60,13 @@ export default function FilterPanel() {
       />
       <FilterSelect
         label="Price/ 1 hour"
-        name="price"
+        name="rentalPrice"
         disabledValue="Choose a price"
         array={prices}
         value={filters.price}
         className={css.price}
         onChange={(value) => {
-          dispatch(setPrice(value));
+          dispatch(setRentalPrice(value));
         }}
       />
       <div className={css.mileage}>

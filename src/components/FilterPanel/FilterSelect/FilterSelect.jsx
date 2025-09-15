@@ -46,7 +46,7 @@ export default function FilterSelect({
           if (context === "menu") {
             return option.value;
           }
-          if (name === "price") {
+          if (name === "rentalPrice") {
             return `To $${option.value}`;
           }
           return option.value;

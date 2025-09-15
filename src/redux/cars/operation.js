@@ -7,12 +7,12 @@ export const fetchCars = createAsyncThunk(
   "cars/fetchAll",
   async ({ page, filters = {} }, thunkAPI) => {
     try {
-      const { brand, price, minMileage, maxMileage } = filters;
+      const { brand, rentalPrice, minMileage, maxMileage } = filters;
       const params = {
         page: page,
         limit: thunkAPI.getState().cars.pagination.limit,
         brand: brand || undefined,
-        rentalPrice: price || undefined,
+        rentalPrice: rentalPrice || undefined,
         minMileage: minMileage || undefined,
         maxMileage: maxMileage || undefined,
       };

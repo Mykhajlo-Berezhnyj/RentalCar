@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/Button/Button";
 import CardList from "../../components/CarList/CarList";
 import Container from "../../components/Container/Container";
-import { nextPage, resetCarsState, setPage } from "../../redux/cars/slice";
+import {
+  nextPage,
+  setLimit,
+  setPage,
+} from "../../redux/cars/slice";
 import {
   selectCars,
   selectCarsStatus,
@@ -17,30 +21,89 @@ import css from "./CatalogPage.module.css";
 import { fetchBrands } from "../../redux/brands/operations";
 import { selectError } from "../../redux/orders/selectors";
 import Loader from "../../components/Loader/Loader";
+import {
+  setBrand,
+  setMaxMileage,
+  setMinMileage,
+  setRentalPrice,
+} from "../../redux/filters/slice";
+import { useSearchParams } from "react-router-dom";
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
-  const { page, totalPages } = useSelector(selectPagination);
+  const { page, totalPages, limit } = useSelector(selectPagination);
   const cars = useSelector(selectCars);
   const isLoading = useSelector(selectisLoading);
   const status = useSelector(selectCarsStatus);
   const error = useSelector(selectError);
   const filters = useSelector(selectFilters);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { brand, rentalPrice, minMileage, maxMileage } = filters;
 
   useEffect(() => {
     dispatch(fetchBrands());
   }, []);
 
   useEffect(() => {
-    dispatch(resetCarsState());
-    dispatch(fetchCars({ page: 1, filters }));
-  }, [dispatch]);
+    const pageFromUrl = Number(searchParams.get("page")) || 1;
+    const limitFromUrl = Number(searchParams.get("limit"));
+    const brandFromUrl = searchParams.get("brand") || "";
+    const rentalPriceFromUrl = searchParams.get("rentalPrice") || "";
+    const minMileageFromUrl = searchParams.get("minMileage") || "";
+    const maxMileageFromUrl = searchParams.get("maxMileage") || "";
+
+    dispatch(setPage(pageFromUrl));
+    dispatch(setLimit(limitFromUrl));
+    dispatch(setBrand(brandFromUrl));
+    dispatch(setRentalPrice(rentalPriceFromUrl));
+    dispatch(setMinMileage(minMileageFromUrl));
+    dispatch(setMaxMileage(maxMileageFromUrl));
+    dispatch(
+      fetchCars({
+        page: pageFromUrl,
+        filters: {
+          brand: brandFromUrl,
+          rentalPrice: rentalPriceFromUrl,
+          minMileage: minMileageFromUrl,
+          maxMileage: maxMileageFromUrl,
+          limit: limitFromUrl,
+        },
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    setSearchParams({
+      page,
+      ...(limit && { limit }),
+      ...(brand && { brand }),
+      ...(rentalPrice && { rentalPrice }),
+      ...(minMileage && { minMileage }),
+      ...(maxMileage && { maxMileage }),
+    });
+  }, [
+    page,
+    limit,
+    brand,
+    rentalPrice,
+    minMileage,
+    maxMileage,
+    setSearchParams,
+  ]);
 
   useEffect(() => {
     if (page > 1) {
-      dispatch(fetchCars({ page, filters }));
+      dispatch(
+        fetchCars({
+          page,
+          filters: {
+            ...filters,
+            limit,
+          },
+        })
+      );
     }
-  }, [page, dispatch]);
+  }, [page, dispatch, filters, limit]);
 
   const handleClick = () => {
     dispatch(nextPage());
