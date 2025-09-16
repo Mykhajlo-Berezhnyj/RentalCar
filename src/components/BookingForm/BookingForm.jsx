@@ -100,7 +100,6 @@ export default function BookingForm({ carId }) {
               placeholder="Booking date"
               aria-label="Booking date"
             />
-            <ErrorPlaceholder name="BookingStartDate" />
             <ErrorPlaceholder name="BookingEndDate" />
             <Field
               as="textarea"
