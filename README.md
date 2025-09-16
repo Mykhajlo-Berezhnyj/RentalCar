@@ -1,125 +1,122 @@
-# Rental Car App
+# BackRental Car App
 
-## Опис
-**Rental Car App** — це веб-додаток для пошуку, бронювання та підтвердження замовлень автомобілів онлайн.  
-Використовується React, Redux, Vite, Axios для асинхронних запитів та React Hot Toast для повідомлень користувачу.  
+Description
+Rental Car App is a web application for searching, booking, and confirming car rentals online. Built with React, Redux, Vite, Axios for asynchronous requests, and React Hot Toast for user notifications.
 
-**макет**: https://www.figma.com/design/A25LdVK3gZOPJaedrkTwWQ/Rental-Car?node-id=0-1&p=f&t=4gbLztu5m6LgQ52k-0
+Design mockup: Figma
 
+Car API documentation: GoIT Car Rental API
 
-**бекенд для автомобілей** https://car-rental-api.goit.global/api-docs/ -
+Custom backend for orders: GitHub Repository (routes for orders implemented; documentation coming soon)
 
-https://github.com/Mykhajlo-Berezhnyj/Backend - (документацію ще не додав. додані тільки роути для роботи з замовленням)
+Routes & Pages
+Route Page Description
+/ HomePage
+/catalog CatalogPage
+/catalog/:carId Car Details Page with BookingForm
+/favorites FavoritesPage
+/orders OrdersPage
+/orders/:carId/:orderId Order Details Page
+/orders/:carId/:orderId?token=... Confirm Order Page
 
-Основні роути та сторінки:
-/ - HomePage 
-/catalog - CatalogPage
-/catalog/:carId = DetailsPage(BookingForm)
-/favorites - FavoritesPage
-/orders - OrdersPage
-/orders/:carId/:orderId - DetailsPage(orders)
-/orders/:carId/:orderId?token - DetailsPage(confirmOrder)
-* - NotFoundPage
+- NotFoundPage
+  Key Features
+  Search cars by brand, price, and mileage
 
----
+View detailed car information
 
-## Основні функції
-- Пошук автомобілів за різними критеріями  
-- Перегляд детальної інформації про автомобіль  
-- Бронювання автомобіля через форму  
-- Підтвердження замовлення через токен 
-- Перегяд активних замовлень на сторінці мої замовлення
-- Перегляд детальної інформації про замолвення на сторінці замовлення 
-<!-- - Повторне надсилання підтвердження на email   в планах--->
-- Асинхронні запити з відображенням Loader під час завантаження  
-- Інтерактивний UI та повідомлення через toast  
+Book a car via form
 
----
+Confirm booking via email token
 
-Структура додатку
-1. **Головна сторінка (/)**
-Домашня сторінка, яка містить банер з основним закликом до дії та кнопкою за допомогою якої здійснюється перехід в каталог.
+View active orders
 
-Основні кнопки навігації: каталог, домашня сторніка лого знаходяться в хедері  і доступні на будь-якій сторінці додатку.
+View order details
 
-2. **Сторінка Каталог автомобілів (/catalog)**
+Async requests with loader indicators
 
-Список всіх доступних автомобілів
+Toast notifications for user feedback
 
-Є можливістю фільтрації за певними критеріями (бренд, ціна, пробіг) 
-Фільтрація транспортних засобів виконується на бекенді, для цього за допомогою фільтрів формуємо відповідні параметри пошуку. Користувач має можливість фільтрувати транспортні засоби за:
-брендом автомобіля, ціною,
-пробігом автомобіля (може бути обрано “від” і “до” окремо або одночасно) якщо вибраний пробіг до менщий за від то віображається помилка і дісаблеться кнопка.
+App Structure
 
-під час нового запиту попередні результати пошуку, скидаються, щоб забезпечити актуальність та точність відображуваних даних відповідно до нових критеріїв фільтрації.
- також була додана кнопка скидання фільтрів на випадок якщо користувач схоче переглянути всі авто. кнопка з'являється після першого запиту з фільтрами і не показується на почату і коли скидаються пошук( використовується умовний рендер) 
+1. **Home Page** (/)
+   Banner with call-to-action
 
-Додана можливість додати автомобіль до обраних.
-Оскільки бекенд не підтримує реєстрацію та авторизацію, список обраних зберігається в Redux.
-Для збереження даних між перезавантаженнями сторінки використовується Redux Persist.
+Navigation buttons (Catalog, Home) always visible in header
 
-Користувач має можливість натиснути на кнопку "Read more" на картці транспортного засобу на сторінці каталогу, щоб перейти на сторінку з детальним описом цього транспортного засобу.
-Клік на автомобіль дає можливість переходу на сторінку деталей.
+2. **Catalog Page** (/catalog)
+   Displays all available cars
 
-Якщо переходимо зі сторінки деталей то дані зразу беруться зі сторе - миттєве завантаження даних, також можемо перейти по прямому посиланню( поділитися з другом і т.д.) - тоді відбувається запит за даним id на бекенд і завантажуються дані з бекенду.
+Backend-powered filtering by:
 
-На сторінці каталогу також є кнопка "Load More", при кліку на яку завантажуються додаткові картки транспортних засобів з урахуванням обраних фільтрів. Пагінація відбувається на бекенді, для цього формуєм відповідні запити.
+Brand
 
- Під час асинхронних запитів завжди показуємо Loader
+Price
 
-3. **Сторінка деталей авто (/catalog/:carId)**
+Mileage (with validation: "to" must be ≥ "from")
 
-Фото автомобіля
+Reset filters button appears after first search
 
-Основні характеристики та додаткові параметри
+Favorites functionality (stored in Redux + persisted via Redux Persist)
 
-Форма бронювання авто
-Користувач має можливість орендувати автомобіль, заповнивши форму на сторінці окремого автомобіля. Результатом вдалої відправки форми є нотифікація про вдалу оренду. Для реєстрації замовлень використано інший бекенд, прописана логіка підчас якої при замовленні спочатку статус замовлення отримує непідтверджене і з бекенда на електронну пошту призодить повідомлення про необхідність підтвердження замовлення - для ідентифікації замовлення використовується токен який відсилається в посиланню електронної пошти.(захист від спаму..тільки підтверджені замовлення щоб розгядалися до обробки) При створенні замовлення в користувача є мождивість переходу на сторінку замовлень
+"Read more" button navigates to car details
 
- Під час завантаження даних використовується Loader
+"Load More" button fetches additional cars (pagination via backend)
 
-4. **Стоорінка профілю -фаворити (/favorites)** - відоображається список авто доданих в обране.
+Loader shown during async operations
 
-5. **Сторінка замовленнь- (/orders**) - сторінка на якій відображається коротке основне інфо про всі замовлення - список замовлень з їх статусом і кнопка при кліку на якій перезодимо на детальну інфо про замовлення.
+3.** Car Details Page** (/catalog/:carId)
+Car photo, specs, accessories
 
-6. **Сторінка замовлення (/orders/:carId/:orderId)**
+Booking form
 
-Перегляд деталей замовлення
-використана сторінка основних деталей інфо але замість форми BookingForm - рендериться деталі замовлення
+Booking triggers email with confirmation token
 
-7. **Сторінка підтвердженя замовлення (/orders/:carId/:orderId?token=...)**- та сома сторінка замовлення але з кнопкою підтвердити замовлення - кнопка поялвяється коли в адресному рядку є токен. тобто коли ми перезодимо по посиланню з електроннної пошти
-При кліку на кнопку відбувається запит на бекенд. якщо все ок, то замовлення підтверджується і статус міняється на підтрвержено.
-можна зв'язуватися менеджерам :)
+Unconfirmed orders are not processed until confirmed
 
+Loader shown during data fetch
 
-Loader під час асинхронних операцій
+4. **Favorites Page** (/favorites)
+   Displays list of favorited cars
 
-8. **Сторінка 404 / Not Found**
+5. **Orders Page** (/orders)
+   List of all orders with status
 
-Виводиться при некоректному URL
+Button to view order details
 
-редірект на головну сторінку через 5с.
+6. **Order Details Page** (/orders/:carId/:orderId)
+   Displays full order info
 
-# Додаткові компоненти
+Reuses layout from car details, but replaces booking form with order info
 
-BookingForm - форма бронювання
+7. **Confirm Order Page** (/orders/:carId/:orderId?token=...)
+   Same as order details page, but includes "Confirm Order" button if token is present
 
-OrderDetails - відображення деталей замовлення
+Clicking the button sends confirmation request to backend
 
-ImgCar, SectionBase, SectionConditions, CarSpecifications, CarAccessories, SectionConditions- блоки деталей авто
+Status updates to "confirmed" upon success
 
-FilterPanel, FilterSelect, FilterInput, ClearFiltersButton - елементи панелі фільтраії
+8. **Not Found Page** (\*)
+   Shown for invalid URLs
 
+Redirects to home after 5 seconds
 
-Loader - індикатор завантаження
+Components
+BookingForm — car booking form
 
-## Демонстрація
-[Демо на Vercel](https://rental-car-yod9.vercel.app/)
+OrderDetails — order info display
 
----
+ImgCar, SectionBase, SectionConditions, CarSpecifications, CarAccessories — car detail blocks
 
-## Інструкції з установки
-```bash
+FilterPanel, FilterSelect, FilterInput, ClearFiltersButton — filtering UI
+
+Loader — loading indicator
+
+Demo
+Live Demo on Vercel
+
+Installation
+bash
 git clone <repository-url>
 cd rental-car-app
 npm install
