@@ -21,7 +21,7 @@ export default function NavBar() {
           </NavLink>
         </li>
         <li className={css.item}>
-          <NavLink to="/catalog" className={getActiveLinkClass}>
+          <NavLink to="/catalog" end className={getActiveLinkClass}>
             Catalog
           </NavLink>
         </li>

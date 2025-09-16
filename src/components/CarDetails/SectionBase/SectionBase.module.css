@@ -1,6 +1,6 @@
 .baseInfo {
   display: flex;
-  text-wrap: nowrap;
+  /* text-wrap: nowrap; */
   gap: 16px;
   align-items: baseline;
   margin-bottom: 8px;

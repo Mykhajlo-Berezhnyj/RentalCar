@@ -63,7 +63,7 @@ export default function FilterPanel() {
         name="rentalPrice"
         disabledValue="Choose a price"
         array={prices}
-        value={filters.price}
+        value={filters.rentalPrice}
         className={css.price}
         onChange={(value) => {
           dispatch(setRentalPrice(value));

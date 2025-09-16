@@ -49,4 +49,8 @@
 
 .btnSend {
   margin: 8px auto 0;
+
+  &:disabled {
+    background-color: gray;
+  }
 }

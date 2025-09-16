@@ -1,5 +1,13 @@
 .input {
   width: 100%;
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 14px 20px;
+  height: 48px;
+  border-radius: var(--radius);
+  background: var(--inputs);
+  color: var(--font-second);
 }
 
 :global(.react-datepicker__day--selected) {

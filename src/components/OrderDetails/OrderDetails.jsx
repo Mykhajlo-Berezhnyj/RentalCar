@@ -20,7 +20,8 @@ export default function OrderDetails({ orderId }) {
     { label: "Car id", key: "carId" },
     { label: "Name", key: "name" },
     { label: "Email", key: "email" },
-    { label: "Booking date", key: "bookingDate", format: true },
+    { label: "Booking start Date", key: "BookingStartDate", format: true },
+    { label: "Booking end Date", key: "BookingEndDate", format: true },
     { label: "Comment", key: "comment" },
     {
       label: "Order status",
@@ -53,7 +54,7 @@ export default function OrderDetails({ orderId }) {
       <ul className={css.listDetail}>
         {fields.map(({ label, key, format, type, icons, colors, text }) => {
           const value = order[key];
-          if (value === "") return null;
+          if (value === "" || value === undefined) return null;
 
           let display = value;
           if (format) display = new Date(value).toLocaleString();

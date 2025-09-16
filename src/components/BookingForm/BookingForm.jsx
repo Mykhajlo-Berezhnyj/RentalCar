@@ -20,7 +20,8 @@ export default function BookingForm({ carId }) {
   const initialValues = {
     name: "",
     email: "",
-    bookingDate: null,
+    BookingStartDate: null,
+    BookingEndDate: null,
     comment: "",
   };
 
@@ -34,7 +35,10 @@ export default function BookingForm({ carId }) {
       .matches(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i, "Not valid email")
       .max(128, "Too Long! Max-128 character")
       .required("Field is required"),
-    bookingDate: Yup.date().min(new Date(), "Date must be today or later"),
+    BookingStartDate: Yup.date().nullable(),
+    BookingEndDate: Yup.date()
+      .nullable()
+      .min(Yup.ref("BookingStartDate"), "End date must be after start date"),
     comment: Yup.string()
       .min(3, "Too Short!")
       .max(500, "Too Long! Max 500 character"),
@@ -72,7 +76,7 @@ export default function BookingForm({ carId }) {
             });
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, isValid }) => (
           <Form className={css.form}>
             <Field
               className={css.field}
@@ -93,11 +97,11 @@ export default function BookingForm({ carId }) {
             {isLoading && <Loader />}
             <DatePickerField
               className={css.field}
-              name="bookingDate"
               placeholder="Booking date"
               aria-label="Booking date"
             />
-            <ErrorPlaceholder name="bookingDate" />
+            <ErrorPlaceholder name="BookingStartDate" />
+            <ErrorPlaceholder name="BookingEndDate" />
             <Field
               as="textarea"
               type="text"
@@ -109,7 +113,7 @@ export default function BookingForm({ carId }) {
             <ErrorPlaceholder name="comment" />
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid}
               size="btnFill"
               className={css.btnSend}
               aria-label="Send form"

@@ -24,14 +24,15 @@
   @media (min-width: 1440px) {
     gap: 72px;
   }
-
 }
 
 .wrapLeft {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   max-width: 640px;
   gap: 40px;
+  flex: 1;
 }
 
 .form {
@@ -46,6 +47,7 @@
 .wrapRight {
   max-width: 488px;
   padding-top: 20px;
+  flex: 1;
 }
 
 .sectionBase {
@@ -93,7 +95,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .dialogButtons {
