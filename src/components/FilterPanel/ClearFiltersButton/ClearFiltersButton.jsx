@@ -17,13 +17,17 @@ export default function ClearFiltersButton() {
     JSON.stringify(filters) !== JSON.stringify(initialState);
 
   const handleReset = () => {
-    dispatch(setHasFilters(false));
-    dispatch(resetFilters());
-    dispatch(resetCarsState());
-    dispatch(fetchCars({ page: 1 }));
+    if (!hasFilters) {
+      dispatch(resetFilters());
+    } else {
+      dispatch(resetFilters());
+      dispatch(setHasFilters(false));
+      dispatch(resetCarsState());
+      dispatch(fetchCars({ page: 1 }));
+    }
   };
 
-  if (!isFilterActive || !hasFilters) return null;
+  if (!isFilterActive) return null;
 
   return (
     <Button
