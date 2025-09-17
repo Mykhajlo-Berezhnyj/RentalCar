@@ -13,18 +13,18 @@ export default function OrderList({ orders }) {
           <ul className={css.orderList}>
             {orders.map((order, index) => (
               <li key={index} className={css.orderCard}>
-                <strong>Order number: </strong>
-                {order._id}
-                <strong>Car Id: </strong>
-                {order.carId}
-                <strong>Booking date:</strong>
-                {order.bookingDate}
-                <strong>Order confirmed:</strong>{" "}
-                <span style={{ color: order.isConfirmed ? "green" : "red" }}>
-                  {order.isConfirmed ? "Yes" : "No"}
-                </span>
-                <strong>Order created:</strong>
-                {order.createdAt}
+                <div className={css.txtCard}>
+                  <strong>Order number: </strong>
+                  {order._id}
+                  <strong>Car Id: </strong>
+                  {order.carId}
+                  <strong>Order confirmed:</strong>{" "}
+                  <span style={{ color: order.isConfirmed ? "green" : "red" }}>
+                    {order.isConfirmed ? "Yes" : "No"}
+                  </span>
+                  <strong>Order created:</strong>
+                  {order.createdAt}
+                </div>
                 <Button
                   size="btnFillLarge"
                   className={css.orderDetails}

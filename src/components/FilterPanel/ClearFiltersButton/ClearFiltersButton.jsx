@@ -5,25 +5,27 @@ import { selectFilters } from "../../../redux/filters/selectors";
 import { initialState, resetFilters } from "../../../redux/filters/slice";
 import { fetchCars } from "../../../redux/cars/operation";
 import { resetCarsState, setHasFilters } from "../../../redux/cars/slice";
-import { useState } from "react";
-import { selectHasFilters } from "../../../redux/cars/selectors";
+import {
+  selectHasFilters,
+  selectPagination,
+} from "../../../redux/cars/selectors";
 
 export default function ClearFiltersButton() {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
   const hasFilters = useSelector(selectHasFilters);
-
+  const { page } = useSelector(selectPagination);
   const isFilterActive =
     JSON.stringify(filters) !== JSON.stringify(initialState);
 
   const handleReset = () => {
-    if (!hasFilters) {
-      dispatch(resetFilters());
-    } else {
+    if (hasFilters || page > 1) {
       dispatch(resetFilters());
       dispatch(setHasFilters(false));
       dispatch(resetCarsState());
       dispatch(fetchCars({ page: 1 }));
+    } else {
+      dispatch(resetFilters());
     }
   };
 

@@ -23,25 +23,25 @@ export default function CarCard({ car, index }) {
       </div>
       <div className={css.cardWrap}>
         <div className={css.txdWrap}>
-          <div
+          <ul
             className={clsx(css.txt, isP11 && css.txt11, isP12 && css.txt12)}
           >
-            <p>
+            <li>
               {car.brand} <span className={css.modelCar}>{car.model}</span>,{" "}
               {car.year}
-            </p>
-            <p>${car.rentalPrice}</p>
-          </div>
+            </li>
+            <li>${car.rentalPrice}</li>
+          </ul>
           <div className={css.info}>
-            <div className={css.subTxt}>
-              <p>{city}</p>
-              <p>{country}</p>
-              <p>{car.rentalCompany}</p>
-            </div>
-            <div className={css.subTxt}>
-              <p>{car.type}</p>
-              <p>{formattedKm} km</p>
-            </div>
+            <ul className={css.subTxt}>
+              <li>{city}</li>
+              <li>{country}</li>
+              <li>{car.rentalCompany}</li>
+            </ul>
+            <ul className={css.subTxt}>
+              <li>{car.type}</li>
+              <li>{formattedKm} km</li>
+            </ul>
           </div>
         </div>
         <Button

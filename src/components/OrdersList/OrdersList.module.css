@@ -26,7 +26,19 @@
   padding: 10px;
   flex-direction: column;
   gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid var(--inputs);
+  border-radius: var(--radius);
+}
+
+.txtCard {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  gap: 12px;
   justify-content: center;
+  align-items: center;
 }
 
 .orderDetails {

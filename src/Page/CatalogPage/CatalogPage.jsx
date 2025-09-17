@@ -2,14 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/Button/Button";
 import CardList from "../../components/CarList/CarList";
 import Container from "../../components/Container/Container";
-import { nextPage, setLimit, setPage } from "../../redux/cars/slice";
+import {
+  nextPage,
+  resetCarsState,
+  setLimit,
+  setPage,
+} from "../../redux/cars/slice";
 import {
   selectCars,
   selectCarsStatus,
   selectisLoading,
   selectPagination,
 } from "../../redux/cars/selectors";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchCars } from "../../redux/cars/operation";
 import FilterPanel from "../../components/FilterPanel/FilterPanel";
 import { selectFilters } from "../../redux/filters/selectors";
@@ -35,12 +40,14 @@ export default function CatalogPage() {
   const filters = useSelector(selectFilters);
   const [searchParams, setSearchParams] = useSearchParams();
   const { brand, rentalPrice, minMileage, maxMileage } = filters;
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     dispatch(fetchBrands());
   }, []);
 
   useEffect(() => {
+    dispatch(resetCarsState());
     const pageFromUrl = Number(searchParams.get("page")) || 1;
     const limitFromUrl = Number(searchParams.get("limit")) || 12;
     const brandFromUrl = searchParams.get("brand") || "";
@@ -51,26 +58,17 @@ export default function CatalogPage() {
     dispatch(setPage(pageFromUrl));
     dispatch(setLimit(limitFromUrl));
     dispatch(setBrand(brandFromUrl));
-    dispatch(setRentalPrice(rentalPriceFromUrl));
+    dispatch(
+      setRentalPrice(rentalPriceFromUrl ? Number(rentalPriceFromUrl) : "")
+    );
     dispatch(setMinMileage(minMileageFromUrl));
     dispatch(setMaxMileage(maxMileageFromUrl));
-    dispatch(
-      fetchCars({
-        page: pageFromUrl,
-        filters: {
-          brand: brandFromUrl,
-          rentalPrice: rentalPriceFromUrl,
-          minMileage: minMileageFromUrl,
-          maxMileage: maxMileageFromUrl,
-          limit: limitFromUrl,
-        },
-      })
-    );
+    setIsReady(true);
   }, []);
 
   useEffect(() => {
     setSearchParams({
-      page,
+      ...{ page },
       ...(limit && { limit }),
       ...(brand && { brand }),
       ...(rentalPrice && { rentalPrice }),
@@ -88,21 +86,28 @@ export default function CatalogPage() {
   ]);
 
   useEffect(() => {
-    if (page > 1) {
-      dispatch(
-        fetchCars({
-          page,
-          filters: {
-            ...filters,
-            limit,
-          },
-        })
-      );
+    if (isReady) {
+      dispatch(fetchCars({ page, filters, limit }));
     }
-  }, [page, dispatch, filters, limit]);
+  }, [isReady, page]);
+
+  // useEffect(() => {
+  //   if (firstRender.current) {
+  //     firstRender.current = false;
+  //     dispatch(
+  //       fetchCars({
+  //         page,
+  //         filters,
+  //         limit,
+  //       })
+  //     );
+  //   }
+  // }, [dispatch, page, filters, limit]);
 
   const handleClick = () => {
-    dispatch(nextPage());
+    const next = page+1
+    dispatch(setPage(next));
+    dispatch(fetchCars({ page: next, limit, filters }));
   };
 
   return (
