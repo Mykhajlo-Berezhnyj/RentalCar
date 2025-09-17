@@ -45,9 +45,14 @@ const orderSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         const confirmed = action.payload;
-        state.items = state.items.map((item) =>
-          item._id === confirmed._id ? confirmed : item
-        );
+        const exist = state.items.some((items) => items._id === confirmed._id);
+        if (exist) {
+          state.items = state.items.map((item) =>
+            item._id === confirmed._id ? confirmed : item
+          );
+        } else {
+          state.items.push(confirmed);
+        }
       })
       .addCase(fetchConfirmOrders.rejected, handleRejected);
   },

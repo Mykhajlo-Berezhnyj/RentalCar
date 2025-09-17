@@ -112,7 +112,7 @@ export default function BookingForm({ carId }) {
             <ErrorPlaceholder name="comment" />
             <Button
               type="submit"
-              disabled={isSubmitting || !isValid}
+              disabled={isSubmitting}
               size="btnFill"
               className={css.btnSend}
               aria-label="Send form"

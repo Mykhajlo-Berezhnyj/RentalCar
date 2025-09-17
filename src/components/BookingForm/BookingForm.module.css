@@ -38,6 +38,8 @@
   border-radius: var(--radius);
   background: var(--inputs);
   color: var(--font-second);
+  resize: none;
+  overflow: auto;
 }
 
 .error {
