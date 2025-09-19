@@ -12,7 +12,7 @@ import {
 import { Button } from "../Button/Button";
 import FilterInput from "./FilterInput/FilterInput";
 import { fetchCars } from "../../redux/cars/operation";
-import { resetCarsState, setHasFilters } from "../../redux/cars/slice";
+import { resetCarsState } from "../../redux/cars/slice";
 import ClearFiltersButton from "./ClearFiltersButton/ClearFiltersButton";
 import { useEffect, useState } from "react";
 import { selectPagination } from "../../redux/cars/selectors";
@@ -23,7 +23,7 @@ export default function FilterPanel() {
   const prices = Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
   const filters = useSelector(selectFilters);
   const [error, setError] = useState(null);
-  const {limit} = useSelector(selectPagination);
+  const { limit } = useSelector(selectPagination);
 
   const min = filters.minMileage ?? null;
   const max = filters.maxMileage ?? Infinity;
@@ -40,7 +40,6 @@ export default function FilterPanel() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setHasFilters(true));
     dispatch(resetCarsState());
     dispatch(fetchCars({ page: 1, limit, filters }));
   };

@@ -50,19 +50,19 @@ export default function CatalogPage() {
     dispatch(resetCarsState());
     const pageFromUrl = Number(searchParams.get("page")) || 1;
     const limitFromUrl = Number(searchParams.get("limit")) || 12;
-    const brandFromUrl = searchParams.get("brand") || "";
-    const rentalPriceFromUrl = searchParams.get("rentalPrice") || "";
-    const minMileageFromUrl = searchParams.get("minMileage") || "";
-    const maxMileageFromUrl = searchParams.get("maxMileage") || "";
+    const brandFromUrl = searchParams.get("brand") || null;
+    const rentalPriceFromUrl = searchParams.get("rentalPrice") || null;
+    const minMileageFromUrl = searchParams.get("minMileage") || null;
+    const maxMileageFromUrl = searchParams.get("maxMileage") || null;
 
     dispatch(setPage(pageFromUrl));
     dispatch(setLimit(limitFromUrl));
-    dispatch(setBrand(brandFromUrl));
+    dispatch(setBrand(brandFromUrl || null));
     dispatch(
-      setRentalPrice(rentalPriceFromUrl ? Number(rentalPriceFromUrl) : "")
+      setRentalPrice(rentalPriceFromUrl ? Number(rentalPriceFromUrl) : null)
     );
-    dispatch(setMinMileage(minMileageFromUrl));
-    dispatch(setMaxMileage(maxMileageFromUrl));
+    dispatch(setMinMileage(minMileageFromUrl || null));
+    dispatch(setMaxMileage(maxMileageFromUrl || null));
     setIsReady(true);
   }, []);
 
@@ -91,21 +91,8 @@ export default function CatalogPage() {
     }
   }, [isReady, page]);
 
-  // useEffect(() => {
-  //   if (firstRender.current) {
-  //     firstRender.current = false;
-  //     dispatch(
-  //       fetchCars({
-  //         page,
-  //         filters,
-  //         limit,
-  //       })
-  //     );
-  //   }
-  // }, [dispatch, page, filters, limit]);
-
   const handleClick = () => {
-    const next = page+1
+    const next = page + 1;
     dispatch(setPage(next));
     dispatch(fetchCars({ page: next, limit, filters }));
   };

@@ -13,4 +13,3 @@ export const selectCarCurrent = (state) => state.cars.current;
 
 export const selectCarsStatus = (state) => state.cars.status;
 
-export const selectHasFilters= (state) => state.cars.hasFilters;

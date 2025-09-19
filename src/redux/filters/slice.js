@@ -23,7 +23,7 @@ const filtersSlice = createSlice({
     setMaxMileage(state, action) {
       state.maxMileage = action.payload;
     },
-    resetFilters(state) {
+    resetFilters() {
       return initialState;
     },
   },

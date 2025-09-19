@@ -4,24 +4,23 @@ import css from "./ClearFiltersButton.module.css";
 import { selectFilters } from "../../../redux/filters/selectors";
 import { initialState, resetFilters } from "../../../redux/filters/slice";
 import { fetchCars } from "../../../redux/cars/operation";
-import { resetCarsState, setHasFilters } from "../../../redux/cars/slice";
-import {
-  selectHasFilters,
-  selectPagination,
-} from "../../../redux/cars/selectors";
+import { resetCarsState } from "../../../redux/cars/slice";
+import { selectPagination } from "../../../redux/cars/selectors";
 
 export default function ClearFiltersButton() {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
-  const hasFilters = useSelector(selectHasFilters);
+  console.log("🚀 ~ ClearFiltersButton ~ filters:", filters);
   const { page } = useSelector(selectPagination);
   const isFilterActive =
-    JSON.stringify(filters) !== JSON.stringify(initialState);
+    filters.brand !== null ||
+    filters.rentalPrice !== null ||
+    filters.minMileage !== null ||
+    filters.maxMileage !== null;
 
   const handleReset = () => {
-    if (hasFilters || page > 1) {
+    if (isFilterActive || page > 1) {
       dispatch(resetFilters());
-      dispatch(setHasFilters(false));
       dispatch(resetCarsState());
       dispatch(fetchCars({ page: 1 }));
     } else {
@@ -29,7 +28,8 @@ export default function ClearFiltersButton() {
     }
   };
 
-  if (!isFilterActive && page ===1 ) return null;
+  console.log("🚀 ~ ClearFiltersButton ~ isFilterActive:", isFilterActive);
+  if (!isFilterActive && page === 1) return null;
 
   return (
     <>
@@ -47,5 +47,3 @@ export default function ClearFiltersButton() {
     </>
   );
 }
-
- 
