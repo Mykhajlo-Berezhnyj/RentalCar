@@ -29,17 +29,23 @@ export default function ClearFiltersButton() {
     }
   };
 
-  if (!isFilterActive) return null;
+  if (!isFilterActive && page ===1 ) return null;
 
   return (
-    <Button
-      size="wait"
-      className={css.reset}
-      aria-label="Reset Filters"
-      title="Reset Filters"
-      onClick={handleReset}
-    >
-      x Reset Filters
-    </Button>
+    <>
+      {((!isFilterActive && page > 1) || isFilterActive) && (
+        <Button
+          size="wait"
+          className={css.reset}
+          aria-label="Reset Filters"
+          title="Reset Filters"
+          onClick={handleReset}
+        >
+          x Reset Filters
+        </Button>
+      )}
+    </>
   );
 }
+
+ 

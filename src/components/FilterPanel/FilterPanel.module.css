@@ -50,6 +50,7 @@
   padding-block: 12px;
   padding-left: 24px;
   align-items: baseline;
+  color: var(--font-main);
 }
 
 .inputWrapper:first-child {
@@ -69,10 +70,6 @@
   align-items: flex-end;
   gap: 10px;
   margin-top: 24px;
-
-  @media (min-width: 768px) {
-    margin-top: 0;
-  }
 }
 
 .error {
