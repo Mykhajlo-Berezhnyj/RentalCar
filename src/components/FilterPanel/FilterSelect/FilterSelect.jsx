@@ -12,19 +12,14 @@ export default function FilterSelect({
   value,
   className,
   onChange,
+  error,
 }) {
-  // const [selected, setSelected] = useState(null);
   const options = array.map((item) => ({
     value: item,
     label: item,
   }));
 
   const selectedOption = options.find((opt) => opt.value === value) || null;
-
-  // useEffect(() => {
-  //   const matchedOption = options.find((opt) => opt.value === value);
-  //   setSelected(matchedOption || null);
-  // }, [value, options]);
 
   return (
     <div className={clsx(css.selectFilter, className)}>
@@ -40,6 +35,7 @@ export default function FilterSelect({
         onChange={(option) => {
           onChange(option.value);
         }}
+        error={error}
         classNamePrefix="custom-select"
         styles={customSelectStyles}
         formatOptionLabel={(option, { context }) => {

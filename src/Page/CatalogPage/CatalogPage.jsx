@@ -19,7 +19,7 @@ import { fetchCars } from "../../redux/cars/operation";
 import FilterPanel from "../../components/FilterPanel/FilterPanel";
 import { selectFilters } from "../../redux/filters/selectors";
 import css from "./CatalogPage.module.css";
-import { fetchBrands } from "../../redux/brands/operations";
+import { fetchBrands } from "../../components/operations";
 import { selectError } from "../../redux/orders/selectors";
 import Loader from "../../components/Loader/Loader";
 import {
@@ -41,10 +41,6 @@ export default function CatalogPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { brand, rentalPrice, minMileage, maxMileage } = filters;
   const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    dispatch(fetchBrands());
-  }, []);
 
   useEffect(() => {
     dispatch(resetCarsState());

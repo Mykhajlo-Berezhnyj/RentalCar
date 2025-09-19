@@ -12,14 +12,16 @@ import {
 import { Button } from "../Button/Button";
 import FilterInput from "./FilterInput/FilterInput";
 import { fetchCars } from "../../redux/cars/operation";
-import { resetCarsState } from "../../redux/cars/slice";
+import { resetCarsState, setHasSearch } from "../../redux/cars/slice";
 import ClearFiltersButton from "./ClearFiltersButton/ClearFiltersButton";
 import { useEffect, useState } from "react";
 import { selectPagination } from "../../redux/cars/selectors";
+import { fetchBrands } from "../operations";
 
 export default function FilterPanel() {
   const dispatch = useDispatch();
-  const brands = useSelector(selectBrands);
+  const [brands, setBrands] = useState([]);
+  const [errorBrands, setErrorBrands] = useState(null);
   const prices = Array.from({ length: 10 }, (_, i) => (i + 1) * 10);
   const filters = useSelector(selectFilters);
   const [error, setError] = useState(null);
@@ -29,6 +31,19 @@ export default function FilterPanel() {
   const max = filters.maxMileage ?? Infinity;
 
   const isValid = !min || !max || Number(max) >= Number(min);
+
+  useEffect(() => {
+    const loadBrands = async () => {
+      try {
+        setError(null);
+        const data = await fetchBrands();
+        setBrands(data);
+      } catch (error) {
+        setErrorBrands(error);
+      }
+    };
+    loadBrands();
+  }, []);
 
   useEffect(() => {
     if (!isValid) {
@@ -41,6 +56,7 @@ export default function FilterPanel() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(resetCarsState());
+    dispatch(setHasSearch(true));
     dispatch(fetchCars({ page: 1, limit, filters }));
   };
 
@@ -49,13 +65,14 @@ export default function FilterPanel() {
       <FilterSelect
         label="Car brand"
         name="brand"
-        disabledValue="Choose a brand"
+        disabledValue={errorBrands ? "Failed to load" : "Choose a brand"}
         array={brands}
         className={css.brand}
         value={filters.brand}
         onChange={(value) => {
           dispatch(setBrand(value));
         }}
+        error={!!errorBrands}
       />
       <FilterSelect
         label="Price/ 1 hour"

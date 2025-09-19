@@ -21,10 +21,10 @@ export const customSelectStyles = {
     display: "flex",
     alignItems: "center",
   }),
-  placeholder: (base) => ({
+  placeholder: (base, state) => ({
     ...base,
     margin: 0,
-    color: "var(--font-main)",
+    color: state.selectProps.error ? "red" : "var(--font-main)",
   }),
   singleValue: (base) => ({
     ...base,

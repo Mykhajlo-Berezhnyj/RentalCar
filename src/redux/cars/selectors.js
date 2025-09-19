@@ -1,4 +1,3 @@
-
 export const selectCars = (state) => state.cars.items;
 
 export const selectFavorites = (state) => state.cars.favorites;
@@ -13,3 +12,4 @@ export const selectCarCurrent = (state) => state.cars.current;
 
 export const selectCarsStatus = (state) => state.cars.status;
 
+export const selectHasSearch = (state) => state.cars.hasSearch;

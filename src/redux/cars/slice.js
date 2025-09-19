@@ -35,7 +35,7 @@ const initialState = {
   items: [],
   favorites: [],
   current: null,
-
+  hasSearch: false,
   pagination: {
     totalCars: null,
     page: 1,
@@ -78,6 +78,9 @@ const slice = createSlice({
         ? state.favorites.filter((fav) => fav.id !== car.id)
         : [...state.favorites, car];
     },
+    setHasSearch(state, action) {
+      state.hasSearch = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -100,6 +103,7 @@ export const {
   nextPage,
   resetCarsState,
   setFavorites,
+  setHasSearch,
 } = slice.actions;
 
 export default slice.reducer;
