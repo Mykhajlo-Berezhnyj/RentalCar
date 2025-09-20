@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import "./App.css";
 import AppBar from "../AppBar/AppBar";
 import { Route, Routes } from "react-router-dom";
@@ -13,9 +13,25 @@ const CatalogPage = lazy(() => import("../../Page/CatalogPage/CatalogPage"));
 const DetailsPage = lazy(() => import("../../Page/DetailsPage/DetailsPage"));
 
 function App() {
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      return savedTheme;
+    }
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    return prefersDark ? "dark" : "light";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
+
   return (
-    <div className="container">
-      <AppBar />
+    <>
+      <AppBar theme={theme} setTheme={setTheme} />
       <div className="pageContent">
         <Suspense fallback={<Loader className="fallbackLoader" />}>
           <Routes>
@@ -35,7 +51,7 @@ function App() {
         position="top-center"
         autoClose={3500}
       />
-    </div>
+    </>
   );
 }
 

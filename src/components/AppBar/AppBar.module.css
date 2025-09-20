@@ -3,11 +3,9 @@
   height: 68px;
   background-color: var(--header-color);
   width: 100%;
-  min-width: 100%;
 }
 
 .appBar {
   display: flex;
   justify-content: space-between;
-   min-width: 100%;
 }

@@ -5,6 +5,7 @@ import Container from "../../components/Container/Container";
 import {
   nextPage,
   resetCarsState,
+  setHasSearch,
   setLimit,
   setPage,
 } from "../../redux/cars/slice";
@@ -59,6 +60,7 @@ export default function CatalogPage() {
     );
     dispatch(setMinMileage(minMileageFromUrl || null));
     dispatch(setMaxMileage(maxMileageFromUrl || null));
+    dispatch(setHasSearch(true));
     setIsReady(true);
   }, []);
 
