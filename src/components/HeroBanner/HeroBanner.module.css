@@ -6,29 +6,29 @@
   max-width: 783px;
   max-height: 204px;
   padding-right: 1px;
-  padding-bottom: 20px;
+  margin-bottom: 60px;
 
   @media (min-width: 768px) {
     text-wrap: nowrap;
-    padding-bottom: 60px;
+   
   }
+}
+
+.txtWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
 .heroTxt {
   color: var(--background);
-  padding-top: 6px;
-  padding-bottom: 10px;
   text-align: center;
+  padding-bottom: 8px;
 
   @media (min-width: 768px) {
     font-size: var(--fs-h2);
     line-height: var(--fs-h2);
-    padding-top: 16px;
-    padding-bottom: 24px;
-  }
-
-  @media (min-width: 1440px) {
-    padding-bottom: 40px;
   }
 }
 

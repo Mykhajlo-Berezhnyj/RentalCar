@@ -7,10 +7,12 @@ export default function HeroBanner() {
 
   return (
     <section className={css.heroBanner}>
-      <h1>Find your perfect rental car</h1>
-      <p className={css.heroTxt}>
-        Reliable and budget-friendly rentals for any journey
-      </p>
+      <div className={css.txtWrapper}>
+        <h1>Find your perfect rental car</h1>
+        <p className={css.heroTxt}>
+          Reliable and budget-friendly rentals for any journey
+        </p>
+      </div>
       <Button size="btnFillLarge" aria-label="View Catalog" className={css.btnCatalog} onClick={() => navigate("/catalog")}>
         View Catalog
       </Button>
