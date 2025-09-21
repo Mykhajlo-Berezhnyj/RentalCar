@@ -19,7 +19,7 @@ export default function OrderList({ orders }) {
                   <strong>Car Id: </strong>
                   {order.carId}
                   <strong>Order confirmed:</strong>{" "}
-                  <span style={{ color: order.isConfirmed ? "green" : "red" }}>
+                  <span title="Requires confirmed of order by email" style={{ color: order.isConfirmed ? "green" : "red" }}>
                     {order.isConfirmed ? "Yes" : "No"}
                   </span>
                   <strong>Order created:</strong>

@@ -78,6 +78,13 @@ const slice = createSlice({
         ? state.favorites.filter((fav) => fav.id !== car.id)
         : [...state.favorites, car];
     },
+    setUpdateFavorites(state, action) {
+      const fav = action.payload;
+      const favIndex = state.favorites.findIndex((f) => f._id === fav.id);
+      if (favIndex !== -1) {
+        state.favorites[favIndex] = fav;
+      }
+    },
     setHasSearch(state, action) {
       state.hasSearch = action.payload;
     },
@@ -104,6 +111,7 @@ export const {
   resetCarsState,
   setFavorites,
   setHasSearch,
+  setUpdateFavorites,
 } = slice.actions;
 
 export default slice.reducer;

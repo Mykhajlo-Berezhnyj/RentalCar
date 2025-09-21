@@ -61,7 +61,10 @@ export default function OrderDetails({ orderId }) {
           if (type === "status") {
             const status = Boolean(value);
             display = (
-              <span style={{ color: colors[status] }}>
+              <span
+                title="Requires confirmed of order by email"
+                style={{ color: colors[status] }}
+              >
                 {icons[status]} {text[status]}
               </span>
             );
